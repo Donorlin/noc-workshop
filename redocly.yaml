@@ -1,0 +1,4 @@
+# OpenAPI contracts validated by `npm run validate:schema` – one entry per API in src/api/<name>/openapi.yaml.
+extends:
+  - recommended
+apis: {}
