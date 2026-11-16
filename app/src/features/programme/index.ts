@@ -8,5 +8,9 @@ export const programmeFeature: Feature = {
       path: "programme",
       lazy: async () => ({ Component: (await import("./list/ProgrammeListPage")).ProgrammeListPage }),
     },
+    {
+      path: "programme/:sessionId",
+      lazy: async () => ({ Component: (await import("./detail/SessionDetailPage")).SessionDetailPage }),
+    },
   ],
 };
