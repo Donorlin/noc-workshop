@@ -1,0 +1,258 @@
+openapi: 3.1.0
+info:
+  title: NoC Programme API
+  version: 1.0.0
+  description: |
+    Programme of the Night of Chances evening: sessions (talks, workshops, panels) and their speakers.
+    Reached through the gateway under `/api/programme`.
+  license:
+    name: MIT
+    identifier: MIT
+servers:
+  - url: /api/programme
+    description: Gateway
+security: []
+tags:
+  - name: sessions
+    description: Programme sessions
+  - name: speakers
+    description: Session speakers
+paths:
+  /sessions:
+    get:
+      tags: [sessions]
+      operationId: searchSessions
+      summary: Search sessions
+      description: |
+        Returns one page of sessions matching all given filters (AND), ordered by `startsAt`, then `title`.
+        Parameters that are not sent do not filter.
+      parameters:
+        - name: title
+          in: query
+          description: Part of the title, case-insensitive. Leading and trailing spaces are ignored.
+          schema:
+            type: string
+            minLength: 2
+            maxLength: 100
+        - name: type
+          in: query
+          schema:
+            $ref: "#/components/schemas/SessionType"
+        - name: room
+          in: query
+          schema:
+            $ref: "#/components/schemas/Room"
+        - name: onlyWithFreeSpots
+          in: query
+          description: When `true`, only sessions with `freeSpots` greater than 0. Sessions without registration (`freeSpots` is `null`) are excluded.
+          schema:
+            type: boolean
+            default: false
+        - name: page
+          in: query
+          description: Zero-based page index.
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+        - name: size
+          in: query
+          description: Page size.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+            default: 10
+      responses:
+        "200":
+          description: Page of sessions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SessionPage"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+  /sessions/{sessionId}:
+    get:
+      tags: [sessions]
+      operationId: getSession
+      summary: Get a session
+      parameters:
+        - $ref: "#/components/parameters/SessionId"
+      responses:
+        "200":
+          description: The session
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Session"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /speakers/{speakerId}:
+    get:
+      tags: [speakers]
+      operationId: getSpeaker
+      summary: Get a speaker
+      parameters:
+        - name: speakerId
+          in: path
+          required: true
+          schema:
+            type: string
+          example: sp-jana-kovac
+      responses:
+        "200":
+          description: The speaker
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Speaker"
+        "404":
+          $ref: "#/components/responses/NotFound"
+components:
+  parameters:
+    SessionId:
+      name: sessionId
+      in: path
+      required: true
+      schema:
+        type: string
+      example: s-ai-agents
+  responses:
+    BadRequest:
+      description: Invalid parameters
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+    NotFound:
+      description: Not found
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+  schemas:
+    SessionType:
+      type: string
+      enum: [TALK, WORKSHOP, PANEL]
+    Room:
+      type: string
+      description: Room code at FEI STU. `AULA` is the main hall.
+      enum: [AULA, CD300, CD150, BC150, BC35, AB150]
+    Track:
+      type: string
+      enum: [AI, SECURITY, DEVELOPMENT, DATA, CAREER]
+    Level:
+      type: string
+      enum: [BEGINNER, INTERMEDIATE, ADVANCED]
+    Language:
+      type: string
+      enum: [EN, SK]
+    SessionSummary:
+      type: object
+      required: [id, title, type, room, track, startsAt, endsAt, freeSpots]
+      properties:
+        id:
+          type: string
+          example: s-ai-agents
+        title:
+          type: string
+          example: AI agents in production
+        type:
+          $ref: "#/components/schemas/SessionType"
+        room:
+          $ref: "#/components/schemas/Room"
+        track:
+          $ref: "#/components/schemas/Track"
+        startsAt:
+          type: string
+          format: date-time
+          example: "2026-11-25T18:00:00+01:00"
+        endsAt:
+          type: string
+          format: date-time
+          example: "2026-11-25T19:00:00+01:00"
+        freeSpots:
+          description: Spots left for registration. `null` when the session needs no registration.
+          type: [integer, "null"]
+          minimum: 0
+          example: 12
+    SessionPage:
+      type: object
+      required: [items, totalCount, page, size]
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/SessionSummary"
+        totalCount:
+          type: integer
+          minimum: 0
+          description: Number of sessions matching the filters, across all pages.
+        page:
+          type: integer
+          minimum: 0
+        size:
+          type: integer
+          minimum: 1
+    Session:
+      allOf:
+        - $ref: "#/components/schemas/SessionSummary"
+        - type: object
+          required: [description, level, language, capacity, requirements, speakerIds]
+          properties:
+            description:
+              type: string
+            level:
+              $ref: "#/components/schemas/Level"
+            language:
+              $ref: "#/components/schemas/Language"
+            capacity:
+              description: Maximum number of attendees. `null` when unlimited.
+              type: [integer, "null"]
+              minimum: 1
+            requirements:
+              description: What attendees need, e.g. "Own laptop".
+              type: array
+              items:
+                type: string
+            speakerIds:
+              description: Speakers in presentation order.
+              type: array
+              items:
+                type: string
+    Speaker:
+      type: object
+      required: [id, fullName, jobTitle, company, bio, photoUrl]
+      properties:
+        id:
+          type: string
+          example: sp-jana-kovac
+        fullName:
+          type: string
+          example: Jana Kováč
+        jobTitle:
+          type: string
+          example: Staff Engineer
+        company:
+          type: string
+          example: Northwind Labs
+        bio:
+          type: string
+        photoUrl:
+          type: [string, "null"]
+          format: uri
+    Problem:
+      type: object
+      description: RFC 9457 problem details.
+      required: [title, status]
+      properties:
+        type:
+          type: string
+          format: uri
+        title:
+          type: string
+        status:
+          type: integer
+        detail:
+          type: string

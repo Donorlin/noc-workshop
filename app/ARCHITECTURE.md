@@ -60,9 +60,9 @@ src/api/
 APIs are registered in [`orval.config.ts`](orval.config.ts) and [`redocly.yaml`](redocly.yaml). All requests
 go through the gateway under `/api/<name>`. See [docs/api-and-mocks.md](docs/api-and-mocks.md).
 
-| API | Base path | Used by |
-|-----|-----------|---------|
-| –   | –         | –       |
+| API | Base path | Operations | Mocks |
+|-----|-----------|------------|-------|
+| [programme](src/api/programme) | `/api/programme` | `searchSessions`, `getSession`, `getSpeaker` | [src/mocks/programme](src/mocks/programme) |
 
 ## Mocks
 
