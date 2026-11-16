@@ -31,6 +31,7 @@ list-screen pattern in the platform docs.
 | Feature                     | Routes | Description |
 |-----------------------------|--------|-------------|
 | [home](src/features/home)   | `/`    | Event overview |
+| [programme](src/features/programme) | `/programme`, `/programme/:sessionId` | Programme list and session detail ([spec](../specification/programme/README.md)) |
 
 ## UI
 
