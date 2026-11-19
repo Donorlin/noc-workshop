@@ -36,7 +36,7 @@ verify, citing the file and line or the browser check that proves it. Don't chan
 
 | Ingredient | Here | For you |
 |---|---|---|
-| Docs an agent can read | MDX + `llms.txt` in the npm package | Ship docs with the library, versioned, indexed |
+| Docs an agent can read | MDX + `llms.txt` next to the library source | Ship docs with the library, versioned, indexed |
 | An opinionated API | `DataTable`, `useLiveFilters`, `disabledReason` | Encode decisions in components, not wiki pages |
 | Patterns, not only components | `docs/patterns/list-screen.mdx` | Document how screens are built and where state lives |
 | A self-describing template | `AGENTS.md`, `ARCHITECTURE.md`, `docs/` | Short always-on rules, longer docs linked |

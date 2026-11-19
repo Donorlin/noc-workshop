@@ -1,0 +1,100 @@
+.noc-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--noc-space-3);
+  border: var(--noc-border-width) solid transparent;
+  border-radius: var(--noc-radius-md);
+  font-weight: 750;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    transform var(--noc-transition),
+    background var(--noc-transition),
+    box-shadow var(--noc-transition);
+}
+.noc-button--md {
+  min-height: 48px;
+  padding: 12px 22px;
+  font-size: var(--noc-font-size-sm);
+}
+.noc-button--sm {
+  min-height: 36px;
+  padding: 7px 14px;
+  font-size: var(--noc-font-size-xs);
+  gap: var(--noc-space-2);
+}
+.noc-button:not([data-disabled]):hover {
+  transform: translateY(-2px);
+  box-shadow: var(--noc-shadow-raised);
+}
+.noc-button:not([data-disabled]):active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+.noc-button--primary {
+  background: var(--noc-color-mint-light);
+  color: #172e2b;
+}
+.noc-button--primary:not([data-disabled]):hover {
+  background: var(--noc-color-mint-light-hover);
+}
+.noc-button--dark {
+  background: var(--noc-color-night);
+  color: var(--noc-color-text-on-dark);
+}
+.noc-button--dark:not([data-disabled]):hover {
+  background: var(--noc-color-night-hover);
+}
+.noc-button--secondary {
+  background: var(--noc-color-surface);
+  border-color: var(--noc-color-border-strong);
+  color: var(--noc-color-text);
+}
+.noc-button--ghost {
+  background: transparent;
+  color: var(--noc-color-text);
+}
+.noc-button--ghost:not([data-disabled]):hover {
+  box-shadow: none;
+  transform: none;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.noc-button--danger {
+  background: var(--noc-color-danger);
+  color: var(--noc-color-text-on-dark);
+}
+.noc-button[data-disabled] {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+.noc-button__spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: noc-spin 0.7s linear infinite;
+}
+@keyframes noc-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.noc-text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--noc-space-2);
+  font-size: var(--noc-font-size-sm);
+  font-weight: 750;
+  color: var(--noc-color-text);
+  text-decoration: none;
+  cursor: pointer;
+}
+.noc-text-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}

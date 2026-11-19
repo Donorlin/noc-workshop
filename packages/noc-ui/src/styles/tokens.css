@@ -1,0 +1,92 @@
+/*
+ * Night of Chances design tokens. Every component reads these variables; override them on :root
+ * (or any subtree) to theme the library. Never hard-code colours in applications.
+ */
+:root {
+  /* Brand palette */
+  --noc-color-night: #292c39;
+  --noc-color-night-hover: #3f4355;
+  --noc-color-ink: #252835;
+  --noc-color-mint: #00b2a9;
+  --noc-color-mint-light: #80e3cf;
+  --noc-color-mint-light-hover: #9aeddb;
+  --noc-color-pink: #f51776;
+  --noc-color-yellow: #f2af00;
+  --noc-color-paper: #faf9f6;
+  --noc-color-morning: #f5f0ea;
+  --noc-color-white: #ffffff;
+
+  /* Semantic colours */
+  --noc-color-text: var(--noc-color-ink);
+  --noc-color-text-muted: #62636c;
+  --noc-color-text-on-dark: #ffffff;
+  --noc-color-background: var(--noc-color-paper);
+  --noc-color-surface: var(--noc-color-white);
+  --noc-color-surface-muted: #efeeea;
+  --noc-color-border: #dededb;
+  --noc-color-border-strong: #b9bcc3;
+  --noc-color-focus: var(--noc-color-mint);
+
+  /* Tones: accent = text/icon, tint = background */
+  --noc-tone-mint-accent: #007a74;
+  --noc-tone-mint-tint: #e0eee8;
+  --noc-tone-yellow-accent: #816008;
+  --noc-tone-yellow-tint: #f7eed3;
+  --noc-tone-pink-accent: #bd155c;
+  --noc-tone-pink-tint: #f7e7ed;
+  --noc-tone-neutral-accent: #4a4c56;
+  --noc-tone-neutral-tint: #eceae5;
+
+  --noc-color-danger: var(--noc-tone-pink-accent);
+  --noc-color-danger-tint: var(--noc-tone-pink-tint);
+  --noc-color-success: var(--noc-tone-mint-accent);
+  --noc-color-success-tint: var(--noc-tone-mint-tint);
+  --noc-color-warning: var(--noc-tone-yellow-accent);
+  --noc-color-warning-tint: var(--noc-tone-yellow-tint);
+
+  /* Typography */
+  --noc-font-heading: "Parkinsans Variable", "Parkinsans", system-ui, sans-serif;
+  --noc-font-body: "Montserrat Variable", "Montserrat", system-ui, sans-serif;
+  --noc-font-size-xs: 11px;
+  --noc-font-size-sm: 13px;
+  --noc-font-size-md: 15px;
+  --noc-font-size-lg: 18px;
+  --noc-font-size-xl: 24px;
+  --noc-font-size-2xl: 32px;
+  --noc-font-size-3xl: 44px;
+  --noc-font-weight-regular: 450;
+  --noc-font-weight-medium: 600;
+  --noc-font-weight-bold: 700;
+  --noc-font-weight-heading: 650;
+  --noc-line-height: 1.6;
+
+  /* Spacing scale (4px base) */
+  --noc-space-0: 0;
+  --noc-space-1: 4px;
+  --noc-space-2: 8px;
+  --noc-space-3: 12px;
+  --noc-space-4: 16px;
+  --noc-space-5: 20px;
+  --noc-space-6: 24px;
+  --noc-space-7: 32px;
+  --noc-space-8: 40px;
+  --noc-space-9: 56px;
+  --noc-space-10: 72px;
+
+  /* Shape */
+  --noc-radius-sm: 4px;
+  --noc-radius-md: 7px;
+  --noc-radius-lg: 10px;
+  --noc-radius-pill: 999px;
+  --noc-border-width: 1px;
+  --noc-accent-border-width: 4px;
+
+  /* Elevation & motion */
+  --noc-shadow-raised: 0 6px 0 rgb(0 0 0 / 9%);
+  --noc-shadow-overlay: 0 12px 32px rgb(41 44 57 / 18%);
+  --noc-transition: 0.2s ease;
+
+  /* Layout */
+  --noc-page-max-width: 1200px;
+  --noc-header-height: 80px;
+}

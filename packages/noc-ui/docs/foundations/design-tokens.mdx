@@ -1,0 +1,86 @@
+---
+title: Design tokens
+description: The --noc-* CSS custom properties for colours, tones, typography, spacing, radius and elevation, taken from the Night of Chances visual identity, and how to use or override them.
+components: [Tone, Space]
+---
+
+# Design tokens
+
+All visual decisions are CSS custom properties on `:root`, prefixed `--noc-`. Components read them; use
+them in the rare application CSS you need. **Never hard-code a hex colour or a pixel spacing.**
+
+## Brand colours
+
+| Token                       | Value     | Use                                         |
+|-----------------------------|-----------|---------------------------------------------|
+| `--noc-color-night`         | `#292c39` | Header, table header, dark buttons          |
+| `--noc-color-ink`           | `#252835` | Body text                                   |
+| `--noc-color-mint`          | `#00b2a9` | Focus ring, active switch, accents          |
+| `--noc-color-mint-light`    | `#80e3cf` | Primary button, current page, active nav    |
+| `--noc-color-pink`          | `#f51776` | Accent border                               |
+| `--noc-color-yellow`        | `#f2af00` | Accent border                               |
+| `--noc-color-paper`         | `#faf9f6` | Page background                             |
+
+## Semantic colours
+
+| Token                         | Use                                  |
+|-------------------------------|--------------------------------------|
+| `--noc-color-text`            | Default text                         |
+| `--noc-color-text-muted`      | Secondary text, descriptions, labels |
+| `--noc-color-text-on-dark`    | Text on night backgrounds            |
+| `--noc-color-background`      | Page background                      |
+| `--noc-color-surface`         | Cards, inputs, tables                |
+| `--noc-color-surface-muted`   | Muted cards, disabled inputs         |
+| `--noc-color-border`          | Card and table borders               |
+| `--noc-color-border-strong`   | Input borders                        |
+| `--noc-color-danger` / `-tint`  | Errors                             |
+| `--noc-color-warning` / `-tint` | Warnings                           |
+| `--noc-color-success` / `-tint` | Success                            |
+
+## Tones
+
+Tags, card accents and alerts share four **tones**: `mint`, `yellow`, `pink`, `neutral` (TypeScript type
+`Tone`). Each tone has an accent (text, border, icon) and a tint (background):
+`--noc-tone-<tone>-accent`, `--noc-tone-<tone>-tint`.
+
+Map each value of a domain enum to one tone **in one place** of the application, e.g.:
+
+```ts
+export const sessionTypeTone: Record<SessionType, Tone> = { TALK: "pink", WORKSHOP: "yellow", PANEL: "mint" };
+```
+
+## Typography
+
+| Token                               | Value                              |
+|-------------------------------------|------------------------------------|
+| `--noc-font-heading`                | Parkinsans – headings, brand text  |
+| `--noc-font-body`                   | Montserrat – everything else       |
+| `--noc-font-size-xs` … `-3xl`       | 11, 13, 15, 18, 24, 32, 44 px      |
+| `--noc-font-weight-regular/medium/bold/heading` | 450, 600, 700, 650     |
+
+Use the [`Heading`, `Text` and `Eyebrow`](typography.mdx) components instead of styling text.
+
+## Spacing
+
+`--noc-space-0` … `--noc-space-10` = 0, 4, 8, 12, 16, 20, 24, 32, 40, 56, 72 px. Layout components take the
+index as `gap` (TypeScript type `Space`), e.g. `<Stack gap={6}>` = 24 px.
+
+## Shape and elevation
+
+| Token                         | Value                        |
+|-------------------------------|------------------------------|
+| `--noc-radius-sm/md/lg/pill`  | 4, 7, 10, 999 px             |
+| `--noc-accent-border-width`   | 4 px (card top accent)       |
+| `--noc-shadow-raised`         | Hovered button               |
+| `--noc-shadow-overlay`        | Tooltips, select menus       |
+| `--noc-page-max-width`        | 1200 px                      |
+
+## Theming
+
+Override tokens on `:root` (or on any element to theme a subtree) **after** importing the library styles:
+
+```css
+:root {
+  --noc-color-mint-light: #9be7d8;
+}
+```

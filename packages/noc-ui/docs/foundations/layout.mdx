@@ -1,0 +1,121 @@
+---
+title: Layout
+description: AppShell, AppShellNav, Page, Breadcrumbs, Stack, Inline, Grid, Card and Section – how every NoC screen is framed and laid out without custom CSS.
+components: [AppShell, AppShellBrand, AppShellNav, NocMark, Page, Breadcrumbs, BreadcrumbItem, Stack, Inline, Grid, Card, Section]
+---
+
+# Layout
+
+A NoC screen is always: `AppShell` (once, in the root layout) → one `Page` per screen → content laid out
+with `Stack`, `Inline`, `Grid`, `Card` and `Section`. Do not write layout CSS in applications.
+
+## AppShell
+
+Dark header with the NoC mark, application name, main navigation and actions, followed by `<main>`.
+Render it once in the root layout route.
+
+```tsx
+import { NavLink, Outlet } from "react-router";
+import { AppShell, AppShellNav } from "@donorlin/noc-ui";
+
+export function RootLayout() {
+  return (
+    <AppShell
+      appName="Organizer"
+      navigation={
+        <AppShellNav>
+          <NavLink to="/programme">Programme</NavLink>
+        </AppShellNav>
+      }
+    >
+      <Outlet />
+    </AppShell>
+  );
+}
+```
+
+| Prop         | Type        | Description                                                                 |
+|--------------|-------------|-----------------------------------------------------------------------------|
+| `appName`    | `string`    | Shown under "Night of Chances", e.g. `Organizer`.                           |
+| `brand`      | `ReactNode` | Replaces the default `AppShellBrand`, e.g. to make it a home link.         |
+| `navigation` | `ReactNode` | An `AppShellNav`.                                                           |
+| `actions`    | `ReactNode` | Right side of the header.                                                   |
+| `children`   | `ReactNode` | Screen content.                                                             |
+
+To make the brand a link to the home page, wrap `AppShellBrand` (mark + "Night of Chances" + app name):
+`brand={<Link to="/"><AppShellBrand appName="Organizer" /></Link>}`.
+
+**`AppShellNav`** is a `<nav>` that styles its links. The link with `aria-current="page"` is highlighted;
+React Router's `NavLink` sets it automatically. `NocMark` is the three-bar brand mark (`size` prop).
+
+## Page
+
+The frame of one screen: breadcrumbs, eyebrow, the single `h1`, description, actions, content.
+Children are stacked with a 24 px gap.
+
+```tsx
+<Page
+  eyebrow="Night of Chances IT / 2026"
+  title="Programme"
+  description="All talks, workshops and panels of the evening."
+  breadcrumbs={…}
+  actions={<Button variant="primary">New session</Button>}
+>
+  <FilterPanel>…</FilterPanel>
+  <DataTable … />
+</Page>
+```
+
+| Prop          | Type        | Description                                        |
+|---------------|-------------|----------------------------------------------------|
+| `title`       | `ReactNode` | Rendered as the page `h1`. Required.               |
+| `eyebrow`     | `ReactNode` | Small uppercase label above the title.             |
+| `description` | `ReactNode` | Muted text under the title.                        |
+| `breadcrumbs` | `ReactNode` | A `Breadcrumbs` element.                           |
+| `actions`     | `ReactNode` | Buttons aligned right of the title.                |
+
+## Breadcrumbs
+
+```tsx
+<Breadcrumbs>
+  <BreadcrumbItem asChild>
+    <Link to="/programme">Programme</Link>
+  </BreadcrumbItem>
+  <BreadcrumbItem current>{session.title}</BreadcrumbItem>
+</Breadcrumbs>
+```
+
+`BreadcrumbItem` props: `asChild` (style the router link you pass as the only child), `current` (the
+current page, rendered as text with `aria-current="page"`). Pass breadcrumbs to `Page`'s `breadcrumbs`.
+
+## Stack, Inline, Grid
+
+| Component | Purpose                              | Props                                                                                       |
+|-----------|--------------------------------------|---------------------------------------------------------------------------------------------|
+| `Stack`   | Vertical list of blocks              | `gap?: Space` (default `4` = 16 px), `align?: "start" \| "center" \| "end" \| "stretch"`     |
+| `Inline`  | Horizontal row (buttons, tags, meta) | `gap?: Space` (default `3`), `align`, `justify?: "start" \| "center" \| "end" \| "between"`, `wrap?: boolean` (default `true`) |
+| `Grid`    | Columns of equal width               | `columns?: 1 \| 2 \| 3 \| 4` (default `2`), `minColumnWidth?: number` (responsive), `gap?: Space` |
+
+All three accept regular `div` props. `Grid` with `columns` collapses to one column under 720 px.
+
+## Card and Section
+
+`Card` is a white bordered surface. `accent` adds the NoC programme-card top border
+(`"mint" | "yellow" | "pink" | "night"`), `padding` is `"none" | "sm" | "md" | "lg"` (default `md`),
+`muted` gives a grey background for secondary content.
+
+`Section` is a titled card – the building block of detail screens. One `Section` per logical group, each
+with its own heading:
+
+```tsx
+<Section title="Speakers" description="People presenting this session" actions={…} accent="pink">
+  …
+</Section>
+```
+
+| Prop          | Type                     | Description                               |
+|---------------|--------------------------|-------------------------------------------|
+| `title`       | `ReactNode`              | Section heading (`h2`). Required.         |
+| `description` | `ReactNode`              | Muted text under the heading.             |
+| `actions`     | `ReactNode`              | Buttons right of the heading.             |
+| `accent`      | `CardProps["accent"]`    | Coloured top border.                      |

@@ -1,0 +1,74 @@
+---
+title: Getting started
+description: Install @donorlin/noc-ui, import the styles, render NocProvider and AppShell, and learn the rules every NoC application follows.
+components: [NocProvider]
+---
+
+# Getting started
+
+`@donorlin/noc-ui` is the UI platform library of Night of Chances applications. It gives every application
+the same look, the same components and the same patterns for forms, tables, filters and data loading.
+
+## Install
+
+The library is an npm workspace of this repository (`packages/noc-ui`). An application depends on it with
+`"@donorlin/noc-ui": "*"` in `package.json` and compiles its TypeScript source – there is no build step.
+
+Peer dependencies: `react` and `react-dom` 19, `react-hook-form` 7, `zod` 4. Fonts (Montserrat, Parkinsans)
+and icons (`lucide-react`) come with the library.
+
+## Set up the application root
+
+Import the stylesheet **once** and render `NocProvider` **once**, at the root of the application:
+
+```tsx
+// src/main.tsx
+import "@donorlin/noc-ui/styles.css";
+import { NocProvider } from "@donorlin/noc-ui";
+
+createRoot(document.getElementById("root")!).render(
+  <NocProvider>
+    <App />
+  </NocProvider>,
+);
+```
+
+`NocProvider` props:
+
+| Prop             | Type        | Default | Description                         |
+|------------------|-------------|---------|-------------------------------------|
+| `tooltipDelayMs` | `number`    | `200`   | Delay before tooltips open.         |
+| `children`       | `ReactNode` |         | The application.                    |
+
+Without `NocProvider`, `Tooltip` and `Button` with `disabledReason` throw at runtime.
+
+## Frame every screen
+
+```tsx
+<AppShell appName="Organizer" navigation={<AppShellNav>…</AppShellNav>}>
+  <Page eyebrow="Night of Chances IT / 2026" title="Programme">
+    …
+  </Page>
+</AppShell>
+```
+
+See [Layout](foundations/layout.mdx).
+
+## Rules for NoC applications
+
+1. **Use library components before writing your own markup or CSS.** Layout is `Stack`, `Inline`, `Grid`,
+   `Card` and `Section` – not custom flexbox. Applications should need almost no CSS.
+2. **Never hard-code colours, spacing or fonts.** Use the `--noc-*` [design tokens](foundations/design-tokens.mdx).
+3. **Forms are `useNocForm` + zod.** Validation rules and messages live in the zod schema, see
+   [Forms](components/forms.mdx).
+4. **Server data is rendered with `QueryState`** (or `DataTable`'s `loading`), see
+   [Data loading](patterns/data-loading.mdx).
+5. **Empty values render as `–`** (`EMPTY_VALUE`). `DescriptionList` and `DataTable` do it for you.
+6. **Unavailable actions stay visible** and explain why: `<Button disabledReason="Coming soon">`.
+7. **Lists and details follow the documented patterns:** [List screen](patterns/list-screen.mdx),
+   [Detail screen](patterns/detail-screen.mdx).
+
+## Where to find what
+
+The full index of pages with one-line descriptions is in [`llms.txt`](llms.txt). All documentation ships
+next to the source in `packages/noc-ui/docs/`, so it always matches the code.

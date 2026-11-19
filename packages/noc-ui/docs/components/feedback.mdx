@@ -1,0 +1,68 @@
+---
+title: Feedback
+description: Alert (info, success, warning, error with action), EmptyState, Skeleton and SectionSkeleton for loading placeholders, and Tooltip.
+components: [Alert, AlertTone, EmptyState, Skeleton, SectionSkeleton, Tooltip]
+---
+
+# Feedback
+
+## Alert
+
+Inline message inside the page.
+
+```tsx
+<Alert tone="warning" title="Speaker details unavailable">
+  The session is shown without its speakers. Try again later.
+</Alert>
+```
+
+| Prop       | Type                                           | Default  | Description |
+|------------|------------------------------------------------|----------|-------------|
+| `tone`     | `"info" \| "success" \| "warning" \| "error"`  | `"info"` | |
+| `title`    | `ReactNode`                                    |          | Bold first line. |
+| `children` | `ReactNode`                                    |          | Details. |
+| `action`   | `ReactNode`                                    |          | e.g. `<Button size="sm" onClick={retry}>Try again</Button>`. |
+
+When to use which tone:
+
+- `error` – a request failed and the content **cannot** be shown (`role="alert"`).
+- `warning` – the content is shown, but **partially** (e.g. one of two requests failed).
+- `info` – neutral notes. `success` – a completed action.
+
+For a missing record (HTTP 404) use `EmptyState`, not an error alert.
+
+## EmptyState
+
+Shown instead of content when there is nothing to show: a search without results, a record that does not
+exist.
+
+```tsx
+<EmptyState
+  title="Session not found"
+  description="It may have been removed from the programme."
+  action={<Button asChild><Link to="/programme">Back to programme</Link></Button>}
+/>
+```
+
+Props: `title` (required), `description`, `icon` (defaults to a "no results" icon), `action`.
+
+## Skeleton and SectionSkeleton
+
+Animated placeholders shaped like the loading content. Prefer them to spinners.
+
+- `<Skeleton width={120} height={16} radius="sm" />` – one block (`radius`: `"sm" | "md" | "pill"`).
+- `<SectionSkeleton rows={4} columns={2} />` – a whole `Section` with a `DescriptionList`; the default
+  loading UI of `QueryState`.
+
+`DataTable` has its own skeleton rows via `loading`.
+
+## Tooltip
+
+```tsx
+<Tooltip content="Copy link">
+  <Button size="sm" iconStart={<Link2 size={16} />} aria-label="Copy link" />
+</Tooltip>
+```
+
+Props: `content`, `children` (one focusable element), `side` (`"top"` default). Requires `NocProvider`. For
+disabled buttons use `Button`'s `disabledReason` instead.

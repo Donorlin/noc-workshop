@@ -1,0 +1,59 @@
+---
+title: QueryState
+description: Render a TanStack Query result (or any similar object) through its loading, error, empty and success states with one component. Also getErrorStatus and getErrorMessage helpers for HTTP errors such as 404.
+components: [QueryState, QueryLike, getErrorStatus, getErrorMessage]
+---
+
+# QueryState
+
+Renders the right state of an asynchronous request: **loading → error → empty → content**. Pass the result of
+TanStack Query's `useQuery` (or a generated query hook) directly.
+
+```tsx
+const sessionQuery = useGetSession(sessionId);
+
+<QueryState query={sessionQuery} loading={<SectionSkeleton rows={6} />}>
+  {(session) => <SessionSection session={session} />}
+</QueryState>
+```
+
+| Prop         | Type                                  | Default                    | Description |
+|--------------|---------------------------------------|----------------------------|-------------|
+| `query`      | `QueryLike<TData>`                    |                            | `{ data, isPending, isError, error, refetch? }` – a `useQuery` result fits. |
+| `children`   | `(data: TData) => ReactNode`          |                            | Rendered with the loaded data. |
+| `loading`    | `ReactNode`                           | `<SectionSkeleton />`      | |
+| `error`      | `(error, retry) => ReactNode`         | error `Alert` + "Try again" | Custom error UI (e.g. a 404 empty state). |
+| `errorTitle` | `ReactNode`                           | `"Something went wrong"`   | Title of the default alert. |
+| `isEmpty`    | `(data) => boolean`                   |                            | |
+| `empty`      | `ReactNode`                           | `<EmptyState title="Nothing found" />` | |
+
+## Not found (404)
+
+```tsx
+<QueryState
+  query={sessionQuery}
+  error={(error, retry) =>
+    getErrorStatus(error) === 404 ? (
+      <EmptyState title="Session not found" action={…} />
+    ) : (
+      <Alert tone="error" title="The session could not be loaded" action={<Button size="sm" onClick={retry}>Try again</Button>} />
+    )
+  }
+>
+  {(session) => …}
+</QueryState>
+```
+
+- `getErrorStatus(error)` → the HTTP status of fetch-like (`error.status`) and axios-like
+  (`error.response.status`) errors, or `undefined`.
+- `getErrorMessage(error)` → a human readable message; used by the default alert.
+
+## Several requests on one screen
+
+Use one `QueryState` **per independent part** of the screen, so a failing secondary request does not hide
+the primary content. See [Data loading](../patterns/data-loading.mdx).
+
+## Lists
+
+For tables, don't wrap `DataTable` in `QueryState` – pass `loading` to the table instead, so the rows stay
+visible while new filters load. See [List screen](../patterns/list-screen.mdx).

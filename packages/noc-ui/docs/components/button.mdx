@@ -1,0 +1,69 @@
+---
+title: Button and TextLink
+description: Button variants and sizes, icons, loading, router links with asChild, and disabledReason for actions that are visible but unavailable (with a tooltip that explains why).
+components: [Button, TextLink, ButtonVariant]
+---
+
+# Button and TextLink
+
+## Button
+
+```tsx
+<Button variant="primary" iconEnd={<Plus size={16} />} onClick={create}>New session</Button>
+<Button>Cancel</Button>
+<Button variant="ghost" size="sm">Reset</Button>
+```
+
+| Prop             | Type                                                        | Default       | Description                                                                 |
+|------------------|-------------------------------------------------------------|---------------|-----------------------------------------------------------------------------|
+| `variant`        | `"primary" \| "dark" \| "secondary" \| "ghost" \| "danger"`  | `"secondary"` | See below.                                                                  |
+| `size`           | `"sm" \| "md"`                                              | `"md"`        | `sm` in toolbars, section headers and tables.                               |
+| `iconStart`      | `ReactNode`                                                 |               | 16 px `lucide-react` icon before the label.                                 |
+| `iconEnd`        | `ReactNode`                                                 |               | Icon after the label (e.g. an arrow for "go to" actions).                   |
+| `loading`        | `boolean`                                                   | `false`       | Spinner, disabled, `aria-busy`.                                              |
+| `disabledReason` | `ReactNode`                                                 |               | Disables the button and shows the reason in a tooltip.                      |
+| `asChild`        | `boolean`                                                   | `false`       | Style the single child (e.g. a router `Link`) as a button.                  |
+
+Plus all native `button` props. `type` defaults to `"button"`; set `type="submit"` in forms.
+
+**Variants.** `primary` (mint) – the one main action of a screen. `dark` (night) – strong secondary
+action. `secondary` (outlined) – every other action. `ghost` – low emphasis, text only. `danger` –
+destructive actions.
+
+### Unavailable actions: `disabledReason`
+
+When an action is visible but not available yet (not implemented, missing permission, wrong state), keep it
+**visible**, disable it and say why:
+
+```tsx
+<Button disabledReason="Coming soon">Edit session</Button>
+```
+
+The button gets `aria-disabled`, ignores clicks, **stays focusable** so keyboard users can reach the
+tooltip, and shows the reason on hover and focus. Prefer it over a bare `disabled`. Requires `NocProvider`.
+
+### Navigation buttons
+
+Use `asChild` with the router link so you get a real `<a href>`:
+
+```tsx
+<Button asChild variant="dark" iconStart={<ArrowLeft size={16} />}>
+  <Link to="/programme">Back to programme</Link>
+</Button>
+```
+
+With `asChild`, `iconStart`/`iconEnd`/`loading` are not rendered – put icons inside the link.
+
+## TextLink
+
+Bold inline link, optionally with a trailing icon: "See full programme →".
+
+```tsx
+<TextLink asChild>
+  <Link to="/programme">
+    See full programme <ArrowRight size={16} />
+  </Link>
+</TextLink>
+```
+
+Props: `iconEnd` (when rendering a plain `<a>`), `asChild`, plus native `a` props.

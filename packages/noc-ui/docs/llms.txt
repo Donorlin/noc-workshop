@@ -1,0 +1,37 @@
+# @donorlin/noc-ui
+
+> UI platform library of Night of Chances applications: opinionated React components, forms, tables and
+> patterns built on Radix UI, TanStack Table and react-hook-form + zod. Read the relevant page before
+> writing code with the library; every page lists the exports it documents in its `components` frontmatter.
+
+## Start here
+
+- [Getting started](getting-started.mdx): Install @donorlin/noc-ui, import the styles, render NocProvider and AppShell, and learn the rules every NoC application follows. Exports: NocProvider.
+
+## Foundations
+
+- [Design tokens](foundations/design-tokens.mdx): The --noc-* CSS custom properties for colours, tones, typography, spacing, radius and elevation, taken from the Night of Chances visual identity, and how to use or override them. Exports: Tone, Space.
+- [Layout](foundations/layout.mdx): AppShell, AppShellNav, Page, Breadcrumbs, Stack, Inline, Grid, Card and Section – how every NoC screen is framed and laid out without custom CSS. Exports: AppShell, AppShellBrand, AppShellNav, NocMark, Page, Breadcrumbs, BreadcrumbItem, Stack, Inline, Grid, Card, Section.
+- [Typography](foundations/typography.mdx): Heading, Text and Eyebrow – the only way to style text in NoC applications. Exports: Heading, Text, Eyebrow.
+
+## Components
+
+- [Avatar](components/avatar.mdx): Round photo of a person with an initials fallback, in three sizes – for speakers, users and contacts. Exports: Avatar.
+- [Button and TextLink](components/button.mdx): Button variants and sizes, icons, loading, router links with asChild, and disabledReason for actions that are visible but unavailable (with a tooltip that explains why). Exports: Button, TextLink, ButtonVariant.
+- [DataTable](components/data-table.mdx): Paginated, sortable table for lists of records with result count, empty and loading states, clickable rows that open a detail, controlled page for returning from a detail, and server-side pagination. Also the standalone Pagination. Exports: DataTable, DataTableColumn, DataTableSorting, Pagination.
+- [DescriptionList](components/description-list.mdx): Read-only label/value pairs in one to three columns – the building block of detail screens. Renders empty values as the library placeholder. Exports: DescriptionList, DescriptionListItem.
+- [Feedback](components/feedback.mdx): Alert (info, success, warning, error with action), EmptyState, Skeleton and SectionSkeleton for loading placeholders, and Tooltip. Exports: Alert, AlertTone, EmptyState, Skeleton, SectionSkeleton, Tooltip.
+- [FilterPanel and useLiveFilters](components/filter-panel.mdx): Filters of list screens that apply while the user types, without a search button – a collapsible FilterPanel ("Hide filters" / "Show filters", "Reset") plus useLiveFilters, which debounces changes, validates the zod schema and emits only valid values. Exports: FilterPanel, useLiveFilters, UseLiveFiltersOptions.
+- [Forms](components/forms.mdx): useNocForm with a zod schema, Form, FormTextField, FormSelect and FormSwitch; validation rules and messages in the schema; standalone TextField, Select, Switch and Field for controls outside a form. Exports: useNocForm, NocForm, UseNocFormOptions, Form, FormTextField, FormSelect, FormSwitch, Field, TextField, Select, SelectOption, Switch.
+- [QueryState](components/query-state.mdx): Render a TanStack Query result (or any similar object) through its loading, error, empty and success states with one component. Also getErrorStatus and getErrorMessage helpers for HTTP errors such as 404. Exports: QueryState, QueryLike, getErrorStatus, getErrorMessage.
+- [Tag and Badge](components/tag.mdx): Tag for categories and statuses with the four NoC tones and an optional icon (e.g. session type Talk / Workshop / Panel); Badge for small counters. Exports: Tag, Badge.
+
+## Patterns
+
+- [Data loading](patterns/data-loading.mdx): How NoC screens load server data with TanStack Query and generated query hooks – QueryState per independent part, dependent requests (load a record, then related records by id), partial failure, keepPreviousData for lists, and not-found handling. Exports: QueryState, SectionSkeleton, Alert, getErrorStatus.
+- [Detail screen](patterns/detail-screen.mdx): The standard NoC detail screen – Page with breadcrumbs and a Back action that returns to the list with its filters, one Section with a DescriptionList per logical group, Tag for enums, Avatar rows for people, disabled actions with disabledReason, skeleton loading, not-found and partial-failure states. Exports: Page, Breadcrumbs, BreadcrumbItem, Section, DescriptionList, SectionSkeleton, Button, Avatar, EmptyState, Alert.
+- [List screen](patterns/list-screen.mdx): The standard NoC list screen – Page, live FilterPanel, DataTable paged by 10 with result count, row click to a detail route, filters and page kept in URL search params so they survive opening a detail, going back and reloading. Exports: Page, FilterPanel, useLiveFilters, DataTable, Alert.
+
+## Utilities
+
+- [Formatting and utilities](utilities/formatting.mdx): formatDate, formatTime, formatTimeRange and formatNumber with the NoC locale (en-GB, 24-hour clock), EMPTY_VALUE and isEmptyValue for missing values, and useDebouncedValue. Exports: formatDate, formatTime, formatTimeRange, formatNumber, EMPTY_VALUE, isEmptyValue, useDebouncedValue.

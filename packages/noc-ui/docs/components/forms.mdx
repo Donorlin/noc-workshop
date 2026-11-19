@@ -1,0 +1,100 @@
+---
+title: Forms
+description: useNocForm with a zod schema, Form, FormTextField, FormSelect and FormSwitch; validation rules and messages in the schema; standalone TextField, Select, Switch and Field for controls outside a form.
+components: [useNocForm, NocForm, UseNocFormOptions, Form, FormTextField, FormSelect, FormSwitch, Field, TextField, Select, SelectOption, Switch]
+---
+
+# Forms
+
+Every NoC form is **react-hook-form + zod**, wired by the library:
+
+1. Describe the values, rules and **error messages** in a zod schema.
+2. Create the form with `useNocForm({ schema, defaultValues })`.
+3. Render `<Form form={form} onSubmit={…}>` with `Form*` fields that find their value by `name`.
+
+Do not call `useForm` from react-hook-form directly, do not validate in `onChange` handlers, and do not
+write validation messages in components.
+
+```tsx
+import { z } from "zod";
+import { Button, Form, FormSelect, FormSwitch, FormTextField, Grid, useNocForm } from "@donorlin/noc-ui";
+
+const sessionSchema = z.object({
+  title: z.string().trim().min(5, "Enter at least 5 characters"),
+  room: z.enum(["CD300", "CD150", "BC150"], { error: "Choose a room" }),
+  capacity: z.string().regex(/^\d{1,3}$/, "Digits only, at most 3"),
+  recorded: z.boolean(),
+});
+
+export function SessionForm({ onSave }: { onSave: (values: z.output<typeof sessionSchema>) => void }) {
+  const form = useNocForm({
+    schema: sessionSchema,
+    defaultValues: { title: "", capacity: "", recorded: false },
+  });
+
+  return (
+    <Form form={form} onSubmit={onSave}>
+      <Grid columns={2}>
+        <FormTextField name="title" label="Title" required />
+        <FormSelect name="room" label="Room" options={rooms} required />
+        <FormTextField name="capacity" label="Capacity" inputMode="numeric" maxLength={3} />
+        <FormSwitch name="recorded" label="Recorded" />
+      </Grid>
+      <Button type="submit" variant="primary" loading={form.formState.isSubmitting}>
+        Save
+      </Button>
+    </Form>
+  );
+}
+```
+
+## useNocForm
+
+| Option          | Type                                                        | Default       | Description |
+|-----------------|-------------------------------------------------------------|---------------|-------------|
+| `schema`        | zod schema of an object                                     |               | Rules and messages. Its output type is what `onSubmit` receives. |
+| `defaultValues` | `DefaultValues<z.input<typeof schema>>`                     |               | Text fields default to `""`, switches to `false`, selects to `undefined`. |
+| `mode`          | `"onTouched" \| "onChange" \| "onBlur" \| "onSubmit" \| "all"` | `"onTouched"` | When fields validate. |
+
+Returns a react-hook-form `UseFormReturn` (`NocForm<typeof schema>`): `reset`, `setValue`, `formState`, …
+
+## Form
+
+`<Form form={form} onSubmit={(values) => …}>` renders `<form noValidate>` and the form context.
+`onSubmit` receives the **parsed** values (zod output: trimmed strings, transformed values) and is only called
+when the form is valid. Omit `onSubmit` for forms that never submit, e.g. live filters.
+
+## Fields
+
+All `Form*` fields take `name` (path in the form values), `label`, `description` (help text shown until there
+is an error) and `disabled`. The error message comes from the schema automatically.
+
+| Component       | Value type                  | Extra props |
+|-----------------|-----------------------------|-------------|
+| `FormTextField` | `string`                    | `placeholder`, `type`, `inputMode`, `maxLength`, `autoComplete`, `iconStart`, `required` |
+| `FormSelect`    | `string \| undefined`       | `options: SelectOption[]`, `placeholder`, `emptyOptionLabel`, `required` |
+| `FormSwitch`    | `boolean`                   | – |
+
+`SelectOption` is `{ value: string; label: ReactNode }`. `emptyOptionLabel` (e.g. `"All types"`) adds a first
+option that sets the value to `undefined` – the standard "no filter" choice; model it as `.optional()` in
+the schema.
+
+`required` only adds a visual `*`. The rule itself belongs in the schema.
+
+## Common rules in zod
+
+| Rule                                    | zod                                                                                   |
+|-----------------------------------------|----------------------------------------------------------------------------------------|
+| Required text                           | `z.string().trim().min(1, "Required")`                                                |
+| At least N characters, but optional     | `z.string().trim().refine((v) => v === "" \|\| v.length >= 2, "Enter at least 2 characters")` |
+| Digits only, max length                 | `z.string().regex(/^\d{0,20}$/, "Digits only, at most 20")`                            |
+| E-mail                                  | `z.email("Enter a valid e-mail")`                                                      |
+| Optional enum (select with empty option)| `z.enum(values).optional()`                                                            |
+| Boolean switch                          | `z.boolean()`                                                                          |
+
+## Controls outside a form
+
+`TextField`, `Select` and `Switch` are the same controls without react-hook-form (controlled with
+`value`/`onChange`, `value`/`onValueChange`, `checked`/`onCheckedChange`). `Field` is the label +
+description/error wrapper for building a custom control: `<Field id label description error required>`.
+Prefer the `Form*` variants whenever there is more than one input.

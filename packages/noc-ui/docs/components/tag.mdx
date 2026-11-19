@@ -1,0 +1,44 @@
+---
+title: Tag and Badge
+description: Tag for categories and statuses with the four NoC tones and an optional icon (e.g. session type Talk / Workshop / Panel); Badge for small counters.
+components: [Tag, Badge]
+---
+
+# Tag and Badge
+
+## Tag
+
+Compact label for a category or status – for example the type of a programme session, as on the NoC
+website: talks pink with a microphone, workshops yellow with a code icon, panels mint with speech bubbles.
+
+```tsx
+import { Code, MessagesSquare, Mic } from "lucide-react";
+
+<Tag tone="yellow" icon={<Code />}>Workshop</Tag>
+```
+
+| Prop       | Type                                        | Default     | Description                     |
+|------------|---------------------------------------------|-------------|---------------------------------|
+| `tone`     | `"mint" \| "yellow" \| "pink" \| "neutral"` | `"neutral"` | See [tones](../foundations/design-tokens.mdx#tones). |
+| `icon`     | `ReactNode`                                 |             | `lucide-react` icon; sized automatically. |
+| `children` | `ReactNode`                                 |             | Label.                          |
+
+**Map enums once.** Create one small component (or a lookup object) per domain enum that returns the tag,
+and use it in tables and details alike:
+
+```tsx
+const sessionTypes = {
+  TALK: { label: "Talk", tone: "pink", icon: <Mic /> },
+  WORKSHOP: { label: "Workshop", tone: "yellow", icon: <Code /> },
+  PANEL: { label: "Panel", tone: "mint", icon: <MessagesSquare /> },
+} as const satisfies Record<SessionType, { label: string; tone: Tone; icon: ReactNode }>;
+
+export function SessionTypeTag({ type }: { type: SessionType }) {
+  const { label, tone, icon } = sessionTypes[type];
+  return <Tag tone={tone} icon={icon}>{label}</Tag>;
+}
+```
+
+## Badge
+
+Small dark counter next to a label: `Saved <Badge>3</Badge>`. Props: `children`.

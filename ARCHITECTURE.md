@@ -34,7 +34,8 @@ list-screen pattern in the noc-ui docs.
 
 ## UI
 
-All UI comes from `@donorlin/noc-ui` (documentation: `node_modules/@donorlin/noc-ui/docs/llms.txt`).
+All UI comes from `@donorlin/noc-ui` – the npm workspace `packages/noc-ui`, consumed as TypeScript source
+without a build (documentation: `packages/noc-ui/docs/llms.txt`).
 Its styles are imported once in `src/main.tsx`, `NocProvider` wraps the app in `src/app/App.tsx`. Features
 contain no CSS; layout uses the library's `Stack`, `Inline`, `Grid`, `Card` and `Section`.
 

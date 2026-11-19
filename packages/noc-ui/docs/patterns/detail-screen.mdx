@@ -1,0 +1,70 @@
+---
+title: Detail screen
+description: The standard NoC detail screen – Page with breadcrumbs and a Back action that returns to the list with its filters, one Section with a DescriptionList per logical group, Tag for enums, Avatar rows for people, disabled actions with disabledReason, skeleton loading, not-found and partial-failure states.
+components: [Page, Breadcrumbs, BreadcrumbItem, Section, DescriptionList, SectionSkeleton, Button, Avatar, EmptyState, Alert]
+---
+
+# Detail screen
+
+A read-only detail is: `Page` (breadcrumbs, title, actions) → one `Section` per logical group → a
+`DescriptionList` (or a list of people) inside each section.
+
+```text
+Programme / Hacking the CTF
+HACKING THE CTF                                   [Edit] [Back]
+┌ Session ───────────────────────────────┐
+│ Title        Type       Room     Time  │
+│ Capacity     Free spots                │
+│ Description ...                        │
+└────────────────────────────────────────┘
+┌ Speakers ──────────────────────────────┐
+│ (JN) Jana Nováková – Staff Engineer    │
+└────────────────────────────────────────┘
+```
+
+## Navigation back to the list
+
+The list keeps its filters and page in the URL (see [List screen](list-screen.mdx)). Carry the same search
+string to the detail and back, so "Back" and the breadcrumb restore the list exactly:
+
+```tsx
+const location = useLocation();
+const listUrl = { pathname: "/programme", search: location.search };
+
+<Page
+  title={session.title}
+  breadcrumbs={
+    <Breadcrumbs>
+      <BreadcrumbItem asChild><Link to={listUrl}>Programme</Link></BreadcrumbItem>
+      <BreadcrumbItem current>{session.title}</BreadcrumbItem>
+    </Breadcrumbs>
+  }
+  actions={
+    <>
+      <Button disabledReason="Coming soon">Edit session</Button>
+      <Button asChild variant="dark"><Link to={listUrl}>Back</Link></Button>
+    </>
+  }
+>
+```
+
+## Sections
+
+- One `Section` per group the specification names, each with its own heading. Keep the order of the
+  specification.
+- Values go through `DescriptionList`; pass raw values and let it render `–` for missing ones.
+- Enums use the same `Tag` mapping as the list.
+- People (speakers, contacts) are `Avatar` + name + role rows inside a `Section`, stacked with `Stack`.
+- Actions that are visible but not available use `disabledReason`.
+
+## States
+
+| State                         | UI |
+|-------------------------------|----|
+| Loading                       | `SectionSkeleton` per section (the `QueryState` default). Keep the `Page` frame visible. |
+| Record not found (404)        | `EmptyState` with a link back to the list. |
+| Main request failed           | Error `Alert` with "Try again". |
+| A secondary request failed    | Show the main sections; the affected section shows a warning `Alert`. |
+
+Loading the record and dependent records (e.g. a session and then its speakers) is described in
+[Data loading](data-loading.mdx).

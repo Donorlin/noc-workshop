@@ -1,0 +1,44 @@
+---
+title: DescriptionList
+description: Read-only label/value pairs in one to three columns – the building block of detail screens. Renders empty values as the library placeholder.
+components: [DescriptionList, DescriptionListItem]
+---
+
+# DescriptionList
+
+Read-only label/value pairs. Use it inside a `Section` on detail screens.
+
+```tsx
+<Section title="Session">
+  <DescriptionList
+    items={[
+      { label: "Title", value: session.title },
+      { label: "Type", value: <SessionTypeTag type={session.type} /> },
+      { label: "Room", value: session.room },
+      { label: "Time", value: formatTimeRange(session.startsAt, session.endsAt) },
+      { label: "Capacity", value: session.capacity },
+      { label: "Description", value: session.description, fullWidth: true },
+    ]}
+  />
+</Section>
+```
+
+| Prop      | Type                    | Default | Description                         |
+|-----------|-------------------------|---------|-------------------------------------|
+| `items`   | `DescriptionListItem[]` |         | Required.                           |
+| `columns` | `1 \| 2 \| 3`           | `2`     | Collapses to one column under 720 px. |
+
+`DescriptionListItem`: `{ label: ReactNode; value: ReactNode; fullWidth?: boolean }`.
+
+## Empty values
+
+`null`, `undefined`, blank strings and empty arrays are rendered as `–` (`EMPTY_VALUE`). Pass the raw value;
+do **not** write `value ?? "N/A"` or `value || "-"` yourself. `0` is a value and is rendered as `0`.
+
+Careful with formatters: `formatTimeRange(undefined, …)` would throw – guard optional values first:
+`value: session.startsAt && formatDate(session.startsAt)`.
+
+## Loading
+
+While the data loads, render `SectionSkeleton` (see [Feedback](feedback.mdx)), or let
+[`QueryState`](query-state.mdx) do it.

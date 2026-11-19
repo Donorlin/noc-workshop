@@ -1,0 +1,34 @@
+---
+title: Formatting and utilities
+description: formatDate, formatTime, formatTimeRange and formatNumber with the NoC locale (en-GB, 24-hour clock), EMPTY_VALUE and isEmptyValue for missing values, and useDebouncedValue.
+components: [formatDate, formatTime, formatTimeRange, formatNumber, EMPTY_VALUE, isEmptyValue, useDebouncedValue]
+---
+
+# Formatting and utilities
+
+Use these helpers instead of `toLocaleString`, `Intl` or date libraries, so every screen formats the same way.
+
+| Function                      | Input                       | Output example        |
+|-------------------------------|-----------------------------|-----------------------|
+| `formatDate(value)`           | ISO date/date-time or `Date`| `25 Nov 2026`         |
+| `formatTime(value)`           | ISO date-time or `Date`     | `18:00`               |
+| `formatTimeRange(start, end)` | two ISO date-times          | `18:00 – 19:00`       |
+| `formatNumber(value)`         | `number`                    | `1,234`               |
+
+All use the `en-GB` locale and a 24-hour clock. They throw on `undefined` – check optional values first.
+
+## Missing values
+
+- `EMPTY_VALUE` – the library-wide placeholder `–` for a missing value.
+- `isEmptyValue(value)` – `true` for `null`, `undefined`, blank strings and empty arrays.
+
+`DescriptionList` and `DataTable` apply them automatically. Use them directly only in custom markup:
+
+```tsx
+<Text>{isEmptyValue(speaker.company) ? EMPTY_VALUE : speaker.company}</Text>
+```
+
+## useDebouncedValue
+
+`useDebouncedValue(value, delayMs = 400)` returns `value` after it stopped changing for `delayMs`. For filter
+forms use [`useLiveFilters`](../components/filter-panel.mdx) instead.

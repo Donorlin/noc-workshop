@@ -50,13 +50,13 @@ noc-app/
 ├── AGENTS.md                 # short rules every agent reads (CLAUDE.md links to it)
 ├── ARCHITECTURE.md, docs/    # how the app is built – for people and agents
 ├── .agents/skills/           # the platform's skills (.claude/skills links here)
-│   ├── noc-ui-docs/          #   look up the UI library in its shipped docs
+│   ├── noc-ui-docs/          #   look up the UI library in its docs
 │   ├── noc-api/              #   OpenAPI contract → hooks → mocks
 │   ├── noc-screen/           #   spec + mockup → screen, checked in the browser
 │   └── playwright-cli/       #   browser automation (from Microsoft)
 ├── specs/programme/          # the ticket: specification, mockups, OpenAPI contract
 ├── src/                      # the app – the feature doesn't exist yet
-└── node_modules/@donorlin/noc-ui/docs/   # the UI library's documentation, shipped in the npm package
+└── packages/noc-ui/          # the UI platform library – source, docs/ for agents, playground
 ```
 
 ## Plan of the hour

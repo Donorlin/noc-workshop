@@ -1,0 +1,78 @@
+---
+title: Data loading
+description: How NoC screens load server data with TanStack Query and generated query hooks – QueryState per independent part, dependent requests (load a record, then related records by id), partial failure, keepPreviousData for lists, and not-found handling.
+components: [QueryState, SectionSkeleton, Alert, getErrorStatus]
+---
+
+# Data loading
+
+NoC applications load server data with **TanStack Query**, usually through query hooks generated from the
+OpenAPI contract. The library renders the states; the application owns the requests.
+
+Rules:
+
+- Never `fetch` in `useEffect`. Use (generated) query hooks.
+- Render each independent part of a screen with its own [`QueryState`](../components/query-state.mdx).
+- Lists: `placeholderData: keepPreviousData` + `DataTable loading`, see [List screen](list-screen.mdx).
+
+## Dependent requests
+
+A detail often needs a second request that depends on the first, e.g. a session returns `speakerIds` and each
+speaker is loaded separately. Start the second request **after** the first succeeds, with `enabled`:
+
+```tsx
+const sessionQuery = useGetSession(sessionId);
+const speakerIds = sessionQuery.data?.speakerIds ?? [];
+
+const speakerQueries = useQueries({
+  queries: speakerIds.map((speakerId) => ({
+    ...getGetSpeakerQueryOptions(speakerId),   // generated options factory
+    enabled: sessionQuery.isSuccess,
+  })),
+});
+```
+
+## Partial failure
+
+The primary content must not disappear because a secondary request failed. Give each part its own state:
+
+```tsx
+<QueryState query={sessionQuery} loading={<SectionSkeleton rows={6} />} error={renderSessionError}>
+  {(session) => (
+    <>
+      <SessionSection session={session} />
+      <SpeakersSection queries={speakerQueries} />   {/* own loading / warning state */}
+    </>
+  )}
+</QueryState>
+```
+
+```tsx
+function SpeakersSection({ queries }: { queries: UseQueryResult<Speaker>[] }) {
+  if (queries.some((query) => query.isPending)) return <SectionSkeleton rows={2} columns={1} />;
+  const speakers = queries.flatMap((query) => (query.data ? [query.data] : []));
+  const failed = queries.some((query) => query.isError);
+
+  return (
+    <Section title="Speakers">
+      <Stack gap={4}>
+        {failed && <Alert tone="warning" title="Some speaker details could not be loaded" />}
+        {speakers.map((speaker) => <SpeakerRow key={speaker.id} speaker={speaker} />)}
+      </Stack>
+    </Section>
+  );
+}
+```
+
+## Not found
+
+Treat HTTP 404 as a state, not an error: `getErrorStatus(error) === 404` → `EmptyState` with a way back.
+Disable retries for it so the user does not wait for three attempts:
+
+```ts
+new QueryClient({
+  defaultOptions: {
+    queries: { retry: (count, error) => getErrorStatus(error) !== 404 && count < 2 },
+  },
+});
+```

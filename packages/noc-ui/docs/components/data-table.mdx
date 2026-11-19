@@ -1,0 +1,101 @@
+---
+title: DataTable
+description: Paginated, sortable table for lists of records with result count, empty and loading states, clickable rows that open a detail, controlled page for returning from a detail, and server-side pagination. Also the standalone Pagination.
+components: [DataTable, DataTableColumn, DataTableSorting, Pagination]
+---
+
+# DataTable
+
+The table of every list screen. It wraps TanStack Table – **do not use `@tanstack/react-table` directly**
+in applications. Default page size is **10**.
+
+```tsx
+const columns: DataTableColumn<SessionSummary>[] = [
+  { id: "title", header: "Title", accessor: "title", sortable: true },
+  { id: "type", header: "Type", accessor: "type", cell: (row) => <SessionTypeTag type={row.type} /> },
+  { id: "room", header: "Room", accessor: "room", sortable: true },
+  { id: "time", header: "Time", accessor: "startsAt", cell: (row) => formatTimeRange(row.startsAt, row.endsAt) },
+  { id: "freeSpots", header: "Free spots", accessor: "freeSpots", align: "end" },
+];
+
+<DataTable
+  columns={columns}
+  data={sessions}
+  getRowId={(row) => row.id}
+  onRowClick={(row) => navigate(`/programme/${row.id}`)}
+  rowLabel={(row) => `Open ${row.title}`}
+  loading={query.isFetching}
+  emptyState={<EmptyState title="No sessions match your filters" />}
+/>
+```
+
+Define `columns` **outside the component** (or with `useMemo`) so they are not recreated on every render.
+
+## Props
+
+| Prop               | Type                                    | Default                 | Description |
+|--------------------|-----------------------------------------|-------------------------|-------------|
+| `columns`          | `DataTableColumn<TRow>[]`               |                         | Required. |
+| `data`             | `TRow[]`                                |                         | All rows (client-side) or the current page (with `rowCount`). |
+| `getRowId`         | `(row) => string`                       |                         | Required. Stable id. |
+| `onRowClick`       | `(row) => void`                         |                         | Makes rows clickable by mouse, Enter and Space – typically opens the detail. |
+| `rowLabel`         | `(row) => string`                       |                         | Accessible name of a clickable row. |
+| `pageSize`         | `number`                                | `10`                    | Rows per page. |
+| `pageIndex`        | `number`                                | uncontrolled            | Current page (0-based). Control it to keep the page across screens. |
+| `onPageChange`     | `(pageIndex) => void`                   |                         | Called when the user changes the page or sorting resets it to 0. |
+| `rowCount`         | `number`                                |                         | Server total. Switches to **server-side pagination**: `data` is not sliced. |
+| `sorting`          | `DataTableSorting`                      | uncontrolled            | `[{ id: "title", desc: false }]`. Single column only. |
+| `onSortingChange`  | `(sorting) => void`                     |                         | |
+| `manualSorting`    | `boolean`                               | `false`                 | The server sorts; the table only reports changes. |
+| `loading`          | `boolean`                               | `false`                 | No data yet → skeleton rows. With data → dims rows while refreshing (keeps them visible). |
+| `emptyState`       | `ReactNode`                             | `<EmptyState title="No results" />` | Shown when `data` is empty. |
+| `showResultCount`  | `boolean`                               | `true`                  | "23 results" above the table. |
+| `resultCountLabel` | `(count) => ReactNode`                  | `` `${count} results` `` | Custom wording, e.g. `(n) => \`Sessions found: ${n}\``. |
+| `caption`          | `string`                                |                         | Visually hidden caption for screen readers. |
+
+## Columns
+
+`DataTableColumn<TRow>`:
+
+| Field      | Type                                     | Description |
+|------------|------------------------------------------|-------------|
+| `id`       | `string`                                 | Unique; used in `sorting`. |
+| `header`   | `ReactNode`                              | Header text. Rendered uppercase. |
+| `accessor` | `keyof TRow \| (row) => unknown`         | Value for sorting and default rendering. |
+| `cell`     | `(row) => ReactNode`                     | Custom content (tags, formatted dates, links). |
+| `sortable` | `boolean`                                | Requires `accessor`. Sorting is alphanumeric; empty values last. |
+| `align`    | `"start" \| "center" \| "end"`           | `end` for numbers. |
+| `width`    | `number \| string`                       | e.g. `120` or `"30%"`. |
+
+Without `cell`, the accessor value is rendered as text and empty values as `–`.
+
+## Keeping the page when returning from a detail
+
+If the detail is a separate route, the table unmounts and an uncontrolled page is lost. Keep the page
+where the filters are (e.g. URL search params) and control it:
+
+```tsx
+<DataTable … pageIndex={page} onPageChange={setPage} />
+```
+
+Reset it to `0` when the filters change. If the data shrinks below the current page, the table shows the
+last existing page. See [List screen](../patterns/list-screen.mdx).
+
+## Server-side pagination
+
+```tsx
+<DataTable
+  columns={columns}
+  data={response.items}          // current page only
+  rowCount={response.totalCount}
+  pageIndex={page}
+  onPageChange={setPage}         // triggers the next request
+  loading={query.isFetching}
+/>
+```
+
+## Pagination
+
+`DataTable` renders `Pagination` itself. Use it standalone only for custom lists:
+`<Pagination pageIndex={0} pageCount={5} onPageChange={setPage} pageSize={10} rowCount={42} />`
+renders "Showing 1–10 of 42" and page buttons.

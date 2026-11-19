@@ -31,8 +31,8 @@ The knowledge exists – in the library's docs and in the template's conventions
 
 ## 2. What makes this platform agent-ready
 
-1. **The UI library ships its docs in the npm package** – `node_modules/@donorlin/noc-ui/docs/`, versioned with
-   the code, starting with an `llms.txt` index. Open it.
+1. **The UI library is documented for agents** – `packages/noc-ui/docs/`, next to its source and versioned with
+   it, starting with an `llms.txt` index. A docs check fails when an export is undocumented. Open it.
 2. **The template describes itself** – a short `AGENTS.md`, plus `ARCHITECTURE.md` and `docs/`.
 3. **Workflows are skills** – `.agents/skills/*/SKILL.md`. Open `noc-screen/SKILL.md`: a description that says
    *when* it applies, then the steps the platform team trusts.

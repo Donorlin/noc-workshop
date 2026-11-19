@@ -39,8 +39,9 @@ mocks. If the API layer doesn't exist yet, stop and say it must be built first (
 Describe the screen by what it does – "page frame with a disabled primary action; filters that apply while
 typing, with a min-length rule; a server-paged table with a result count and clickable rows; state that
 survives the detail and a reload; loading, empty and error states". Then use the **`noc-ui-docs` skill** to
-answer each concern from `node_modules/@donorlin/noc-ui/docs` – **`docs/patterns/` first** (list screen,
-detail screen, data loading), then the component pages, then the props in the installed `.d.ts`. If your
+answer each concern from `packages/noc-ui/docs` – **`docs/patterns/` first** (list screen, detail
+screen, data loading), then the component pages, then the props in `packages/noc-ui/src`. Never edit
+`packages/noc-ui` while building a screen. If your
 agent can delegate to a subagent, let it do the reading and return cited answers.
 
 ## 4. Plan – and wait for confirmation

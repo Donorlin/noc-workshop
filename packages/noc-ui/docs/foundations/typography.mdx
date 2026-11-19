@@ -1,0 +1,43 @@
+---
+title: Typography
+description: Heading, Text and Eyebrow – the only way to style text in NoC applications.
+components: [Heading, Text, Eyebrow]
+---
+
+# Typography
+
+Headings use Parkinsans, everything else Montserrat. Do not style text with CSS; use these components.
+
+## Heading
+
+```tsx
+<Heading level={2}>Speakers</Heading>
+<Heading level={1} accent>budúcnosť technológií.</Heading>
+```
+
+| Prop     | Type                           | Default           | Description                                  |
+|----------|--------------------------------|-------------------|----------------------------------------------|
+| `level`  | `1 \| 2 \| 3 \| 4`             | `2`               | Semantic `h1`–`h4`.                           |
+| `size`   | `"sm" \| "md" \| "lg" \| "xl"` | follows `level`   | Visual size, independent of the level.        |
+| `accent` | `boolean`                      | `false`           | Mint colour, the NoC highlight.               |
+
+`Page` already renders the `h1`; inside a page start at `level={2}`. `Section` renders its own `h2`.
+
+## Text
+
+```tsx
+<Text tone="muted" size="sm">Updated 16 Nov 2026</Text>
+<Text as="span" weight="bold">Jana Nováková</Text>
+```
+
+| Prop     | Type                                 | Default     |
+|----------|--------------------------------------|-------------|
+| `size`   | `"xs" \| "sm" \| "md" \| "lg"`       | `"md"`      |
+| `tone`   | `"default" \| "muted" \| "danger"`   | `"default"` |
+| `weight` | `"regular" \| "medium" \| "bold"`    | `"regular"` |
+| `as`     | `"p" \| "span" \| "div"`             | `"p"`       |
+
+## Eyebrow
+
+Small uppercase, letter-spaced label above a title: `<Eyebrow>Night of Chances IT / 2026</Eyebrow>`.
+`Page` renders it for you through its `eyebrow` prop.

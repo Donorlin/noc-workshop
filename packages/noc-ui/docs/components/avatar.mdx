@@ -1,0 +1,29 @@
+---
+title: Avatar
+description: Round photo of a person with an initials fallback, in three sizes – for speakers, users and contacts.
+components: [Avatar]
+---
+
+# Avatar
+
+```tsx
+<Avatar name="Jana Nováková" src={speaker.photoUrl} size="lg" />
+```
+
+| Prop   | Type                   | Default | Description                                                   |
+|--------|------------------------|---------|---------------------------------------------------------------|
+| `name` | `string`               |         | Full name: accessible label and initials (`JN`). Required.    |
+| `src`  | `string`               |         | Photo URL; initials show while loading or when it fails.      |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"`  | 32, 48, 72 px.                                                 |
+
+Combine with `Inline` and `Stack` for a person row:
+
+```tsx
+<Inline gap={3}>
+  <Avatar name={speaker.name} src={speaker.photoUrl} />
+  <Stack gap={0}>
+    <Text weight="bold">{speaker.name}</Text>
+    <Text size="sm" tone="muted">{speaker.jobTitle}, {speaker.company}</Text>
+  </Stack>
+</Inline>
+```

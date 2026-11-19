@@ -2,7 +2,7 @@
   "name": "noc-app",
   "private": true,
   "version": "0.1.0",
-  "description": "Night of Chances Organizer – application template for the NoC agentic engineering workshop.",
+  "description": "Night of Chances Organizer \u2013 application template for the NoC agentic engineering workshop.",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -13,13 +13,15 @@
     "format": "prettier --write .",
     "test": "vitest run",
     "validate:schema": "redocly lint",
-    "generate:api": "orval"
+    "generate:api": "orval",
+    "check:ui": "npm run check --workspace=@donorlin/noc-ui",
+    "dev:ui": "npm run dev --workspace=@donorlin/noc-ui"
   },
   "engines": {
     "node": ">=22.12"
   },
   "dependencies": {
-    "@donorlin/noc-ui": "file:../noc-ui/donorlin-noc-ui-0.1.0.tgz",
+    "@donorlin/noc-ui": "*",
     "@tanstack/react-query": "^5.107.1",
     "lucide-react": "^1.73.0",
     "react": "^19.3.1",
@@ -49,5 +51,8 @@
     "typescript-eslint": "^8.72.2",
     "vite": "^8.3.8",
     "vitest": "^5.1.0"
-  }
+  },
+  "workspaces": [
+    "packages/*"
+  ]
 }

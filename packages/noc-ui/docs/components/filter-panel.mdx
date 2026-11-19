@@ -1,0 +1,69 @@
+---
+title: FilterPanel and useLiveFilters
+description: Filters of list screens that apply while the user types, without a search button – a collapsible FilterPanel ("Hide filters" / "Show filters", "Reset") plus useLiveFilters, which debounces changes, validates the zod schema and emits only valid values.
+components: [FilterPanel, useLiveFilters, UseLiveFiltersOptions]
+---
+
+# FilterPanel and useLiveFilters
+
+NoC list screens filter **live**: results refresh shortly after the user stops typing, there is no search
+button. Invalid input (e.g. one character where two are required) shows its error and keeps the previous
+results.
+
+```tsx
+const filterSchema = z.object({
+  title: z.string().trim().refine((v) => v === "" || v.length >= 2, "Enter at least 2 characters"),
+  type: z.enum(["TALK", "WORKSHOP", "PANEL"]).optional(),
+  onlyAvailable: z.boolean(),
+});
+type Filters = z.output<typeof filterSchema>;
+const emptyFilters: Filters = { title: "", type: undefined, onlyAvailable: false };
+
+export function ProgrammeFilters({ value, onChange }: { value: Filters; onChange: (filters: Filters) => void }) {
+  const form = useNocForm({ schema: filterSchema, defaultValues: value });
+  useLiveFilters({ form, onChange, debounceMs: 400 });
+
+  return (
+    <Form form={form}>
+      <FilterPanel onReset={() => form.reset(emptyFilters)}>
+        <FormTextField name="title" label="Title" iconStart={<Search />} description="At least 2 characters" />
+        <FormSelect name="type" label="Type" emptyOptionLabel="All types" options={typeOptions} />
+        <FormSwitch name="onlyAvailable" label="Only with free spots" />
+      </FilterPanel>
+    </Form>
+  );
+}
+```
+
+## useLiveFilters
+
+| Option       | Type                       | Default | Description |
+|--------------|----------------------------|---------|-------------|
+| `form`       | result of `useNocForm`     |         | The filter form. |
+| `onChange`   | `(values: TOutput) => void`|         | Called with the **parsed** values after the debounce, only when the whole form is valid. |
+| `debounceMs` | `number`                   | `400`   | Quiet period after the last change. |
+
+- It does **not** call `onChange` on mount: initialise your filter state with the same values you pass as
+  `defaultValues`.
+- `form.reset(…)` counts as a change, so "Reset" refreshes the results too.
+- Do not build this with `useEffect` + `setTimeout` or `useDebouncedValue` in the application.
+
+## FilterPanel
+
+| Prop           | Type                       | Default       | Description |
+|----------------|----------------------------|---------------|-------------|
+| `children`     | `ReactNode`                |               | Filter fields, laid out in a grid. |
+| `title`        | `ReactNode`                | `"Filters"`   | |
+| `columns`      | `2 \| 3 \| 4`              | `3`           | Columns on wide screens (2 under 900 px, 1 under 600 px). |
+| `onReset`      | `() => void`               |               | Shows a "Reset" button. |
+| `collapsible`  | `boolean`                  | `true`        | "Hide filters" / "Show filters" toggle. |
+| `open`, `onOpenChange` | `boolean`, `(open) => void` |      | Control the collapsed state (e.g. keep it across screens). |
+| `defaultOpen`  | `boolean`                  | `true`        | |
+
+Switches are aligned with the inputs next to them automatically.
+
+## Where the filter state lives
+
+The filter **values** must survive leaving the list (opening a detail) and coming back. Keep them above the
+filter form – in URL search params when the detail is a separate route. See
+[List screen](../patterns/list-screen.mdx).

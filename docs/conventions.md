@@ -18,7 +18,7 @@ src/features/<feature>/
 
 ## UI
 
-- Only `@donorlin/noc-ui` components. Check the docs (`node_modules/@donorlin/noc-ui/docs/llms.txt`)
+- Only `@donorlin/noc-ui` components. Check the docs (`packages/noc-ui/docs/llms.txt`)
   for the right component and pattern before writing a screen.
 - No CSS files in features, no inline styles, no hard-coded colours.
 - Icons from `lucide-react`.

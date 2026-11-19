@@ -1,0 +1,95 @@
+---
+title: List screen
+description: The standard NoC list screen – Page, live FilterPanel, DataTable paged by 10 with result count, row click to a detail route, filters and page kept in URL search params so they survive opening a detail, going back and reloading.
+components: [Page, FilterPanel, useLiveFilters, DataTable, Alert]
+---
+
+# List screen
+
+A list screen is: `Page` → `FilterPanel` with live filters → (error `Alert`) → `DataTable`. Clicking a row
+opens the detail.
+
+```text
+┌ Page: eyebrow, title, description, actions ────────────────────────┐
+│ ┌ FilterPanel ──────────────────────── Reset · Hide filters ┐      │
+│ │ Title [________]   Type [All types ▾]   (o) Only free      │      │
+│ └────────────────────────────────────────────────────────────┘      │
+│ 23 results                                                          │
+│ ┌ DataTable (10 per page, rows clickable) ───────────────────┐      │
+│ └────────────────────────────── Showing 1–10 of 23  ‹ 1 2 3 › ┘      │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+## Where the state lives
+
+When the detail is a **separate route**, the list unmounts while the detail is open. Everything the user
+expects to find again after "Back" – **filters and page** – must therefore live outside the list
+component. Keep it in the **URL search params**: it survives the detail, browser back/forward and reload,
+and links are shareable. Server data itself is cached by TanStack Query under a key built from the filters,
+so returning shows the results instantly.
+
+```tsx
+// React Router: useSearchParams. Parse and validate the params with the same zod schema as the form.
+const [searchParams, setSearchParams] = useSearchParams();
+const filters = parseFilters(searchParams);         // → Filters, invalid params fall back to defaults
+const page = Number(searchParams.get("page") ?? 0);
+
+const setFilters = (next: Filters) => setSearchParams(toSearchParams(next), { replace: true }); // resets page
+const setPage = (next: number) => setSearchParams(toSearchParams(filters, next), { replace: true });
+```
+
+Use `replace: true` so typing in a filter does not create a history entry per keystroke.
+
+## Loading the data
+
+```tsx
+const query = useSearchSessions(toRequest(filters), { query: { placeholderData: keepPreviousData } });
+```
+
+`placeholderData: keepPreviousData` keeps the previous results visible while new filters load; pass
+`loading={query.isFetching}` to `DataTable` so it dims them. Do not wrap the table in `QueryState`.
+
+## Putting it together
+
+```tsx
+export function ProgrammeListPage() {
+  const navigate = useNavigate();
+  const { filters, setFilters, page, setPage } = useProgrammeSearchParams();
+  const query = useSearchSessions(toRequest(filters), { query: { placeholderData: keepPreviousData } });
+
+  return (
+    <Page eyebrow="Night of Chances IT / 2026" title="Programme">
+      <ProgrammeFilters value={filters} onChange={setFilters} />
+
+      {query.isError && (
+        <Alert tone="error" title="The programme could not be loaded"
+               action={<Button size="sm" onClick={() => query.refetch()}>Try again</Button>} />
+      )}
+
+      <DataTable
+        columns={columns}
+        data={query.data?.items ?? []}
+        getRowId={(row) => row.id}
+        loading={query.isFetching}
+        pageIndex={page}
+        onPageChange={setPage}
+        onRowClick={(row) => navigate({ pathname: `/programme/${row.id}`, search: location.search })}
+        rowLabel={(row) => `Open ${row.title}`}
+        emptyState={<EmptyState title="No sessions match your filters" description="Try different filters." />}
+      />
+    </Page>
+  );
+}
+```
+
+`ProgrammeFilters` is the [live filter form](../components/filter-panel.mdx). Pass the current `filters` as its
+`defaultValues` so the form shows them again after "Back".
+
+## Checklist
+
+- One `Page` with the screen title; filters in a `FilterPanel`; no search button.
+- Filter rules (min length, digits only, …) in the zod schema; invalid input keeps the previous results.
+- `DataTable` with `pageSize` 10 (default), the result count, `onRowClick` and `rowLabel`.
+- Filters and page in the URL; page resets to 0 when filters change.
+- Loading: `loading={query.isFetching}` + `keepPreviousData`. Error: `Alert` with "Try again". No results:
+  `emptyState`.

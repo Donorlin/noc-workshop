@@ -1,0 +1,69 @@
+.noc-heading {
+  font-family: var(--noc-font-heading);
+  font-weight: var(--noc-font-weight-heading);
+  color: var(--noc-color-text);
+  line-height: 1.2;
+}
+.noc-heading--xl {
+  font-size: var(--noc-font-size-3xl);
+  letter-spacing: -1.5px;
+  line-height: 1.1;
+}
+.noc-heading--lg {
+  font-size: var(--noc-font-size-xl);
+  letter-spacing: -0.6px;
+}
+.noc-heading--md {
+  font-size: var(--noc-font-size-lg);
+  letter-spacing: -0.4px;
+}
+.noc-heading--sm {
+  font-size: var(--noc-font-size-md);
+  letter-spacing: -0.2px;
+}
+.noc-heading--accent {
+  color: var(--noc-tone-mint-accent);
+}
+
+.noc-text {
+  line-height: var(--noc-line-height);
+}
+.noc-text--xs {
+  font-size: var(--noc-font-size-xs);
+}
+.noc-text--sm {
+  font-size: var(--noc-font-size-sm);
+}
+.noc-text--md {
+  font-size: var(--noc-font-size-md);
+}
+.noc-text--lg {
+  font-size: var(--noc-font-size-lg);
+}
+.noc-text--default {
+  color: var(--noc-color-text);
+}
+.noc-text--muted {
+  color: var(--noc-color-text-muted);
+}
+.noc-text--danger {
+  color: var(--noc-color-danger);
+}
+.noc-text--regular {
+  font-weight: var(--noc-font-weight-regular);
+}
+.noc-text--medium {
+  font-weight: var(--noc-font-weight-medium);
+}
+.noc-text--bold {
+  font-weight: var(--noc-font-weight-bold);
+}
+
+.noc-eyebrow {
+  font-size: var(--noc-font-size-xs);
+  font-weight: var(--noc-font-weight-bold);
+  letter-spacing: 1.65px;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: var(--noc-color-text-muted);
+}
