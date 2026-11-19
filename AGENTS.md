@@ -13,6 +13,18 @@ NoC Organizer – React application built on the NoC platform (`@donorlin/noc-ui
 
 Read the relevant documents before changing code. Do not start coding until you know where the change fits.
 
+`workshop/` is the participant guide of a workshop about this repository. It is not project documentation:
+never use it as context for a task.
+
+## Skills
+
+Project skills live in `.agents/skills/` (`.claude/skills` links to it):
+
+- `noc-ui-docs` – look up `@donorlin/noc-ui` in the docs shipped with the package
+- `noc-api` – OpenAPI contract → validated → generated TanStack Query hooks → MSW mocks
+- `noc-screen` – specification + mockup → noc-ui screen, checked in the browser
+- `playwright-cli` – browser automation (vendored from microsoft/playwright-cli)
+
 ## Platform
 
 - UI is built **only** with `@donorlin/noc-ui`. Its documentation ships in the package:

@@ -1,12 +1,13 @@
 # NoC Organizer
 
 Back office of the **Night of Chances** organizers, built on the NoC platform library
-[`@donorlin/noc-ui`](https://github.com/donorlin/noc-ui). It is the application template of the
-[NoC agentic engineering workshop](https://github.com/donorlin/noc-workshop):
+[`@donorlin/noc-ui`](https://www.npmjs.com/package/@donorlin/noc-ui).
 
-- `main` – the start state: the platform is set up, the `programme` feature is only specified in
-  [`specs/programme/`](specs/programme/README.md).
-- `solution` – the finished feature. `step-1-api`, `step-2-list`, `step-3-detail` are checkpoints.
+> **Workshop?** Start at [workshop/README.md](workshop/README.md).
+
+Branches: `main` – the start state, the `programme` feature is only specified in
+[`specs/programme/`](specs/programme/README.md) · `step-1-api` · `step-2-list` · `solution` (with the detail
+screen and tests).
 
 ## Quick start
 
@@ -47,6 +48,8 @@ src/
 └── test/                 # test setup and render helpers
 specs/                    # functional specifications (tickets) with mockups and OpenAPI contracts
 docs/                     # development, conventions, API and mocks, testing
+.agents/skills/           # agent skills of the platform (.claude/skills links here)
+workshop/                 # the workshop guide
 ```
 
 See [ARCHITECTURE.md](ARCHITECTURE.md) for how it fits together.
