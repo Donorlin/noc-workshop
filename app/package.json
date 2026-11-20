@@ -2,7 +2,7 @@
   "name": "noc-app",
   "private": true,
   "version": "0.1.0",
-  "description": "Night of Chances Organizer \u2013 application template for the NoC agentic engineering workshop.",
+  "description": "Night of Chances Organizer – application template for the NoC agentic engineering workshop.",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -46,6 +46,7 @@
     "jsdom": "^31.0.1",
     "msw": "^3.0.6",
     "orval": "^8.48.0",
+    "playwright": "^1.65.1",
     "prettier": "^3.10.1",
     "typescript": "~6.0.3",
     "typescript-eslint": "^8.72.2",

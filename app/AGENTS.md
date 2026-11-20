@@ -20,7 +20,9 @@ Project skills live in `.agents/skills/` (`.claude/skills` links to it):
 - `noc-ui-docs` – look up `@donorlin/noc-ui` in the docs shipped with the package
 - `noc-api` – OpenAPI contract → validated → generated TanStack Query hooks → MSW mocks
 - `noc-screen` – specification + mockup → noc-ui screen, checked in the browser
-- `playwright-cli` – browser automation (vendored from microsoft/playwright-cli)
+- `playwright-cli` – browser automation (vendored from microsoft/playwright-cli); run it as
+  `npx playwright cli …` – `playwright` is a dev dependency; if its browser is missing, install it with
+  `npx playwright install chromium`
 
 ## Platform
 

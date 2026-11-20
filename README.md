@@ -42,7 +42,7 @@ npm run dev          # http://localhost:5173 – the Organizer home page
 Then start your agent in `app/` (`copilot`, `claude`, `codex`, …) in a second terminal. The specification lives
 one level up, in `../specification/`; approve that directory when the agent first asks to read it.
 
-Optional – lets the agent look at the app in a browser: `npm install -g @playwright/cli@latest`.
+Playwright is a dev dependency; the agent downloads its browser itself the first time it looks at the app.
 
 ## What is in this repository
 
