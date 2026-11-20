@@ -12,37 +12,57 @@
 ██║  ██║╚██████╔╝███████╗██║ ╚████║   ██║   ███████║
 ╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝  ╚═══╝   ╚═╝   ╚══════╝
 
-+==[ NIGHT OF CHANCES IT // 2026 ]========[ AGENTIC ENGINEERING ON YOUR OWN PLATFORM ]==[ 60 MIN ]+
++==[ NIGHT OF CHANCES IT // 2026 ]=====[ FROM FUNCTIONAL SPECIFICATION TO WORKING UI ]=====[ 60 MIN ]+
 ```
 
-# Agentic engineering on your own platform
+# From Functional Specification to Working UI
 
-Your coding agent knows React. It has never seen **your** component library or **your** way of integrating
-backends, so it writes plausible code against an API it imagined. In one hour you will see how a platform
-team closes that gap with **skills**, and how a developer uses them to go from a specification to a verified
-feature.
+**Night of Chances IT 2026** · 25 November, 18:00–19:00 · room AB35 · Daniel Jahodka, Slovenská sporiteľňa
 
-> **Agentic engineering is not "let the AI do it".** Skills make the agent repeat the workflows the platform
-> team trusts: read the docs before writing code, generate API clients the same way every time, mock every
-> state, look at the result in a browser. You still own the specification, the review and the merge.
+Turn a functional specification and visual requirements into a working frontend application with an AI
+agent – **while keeping the architecture, the design standards and the code quality** of the project.
 
-## Setup – 3 minutes
+**For** frontend developers (React/TypeScript) who want to build with AI agents systematically, not by
+trial and error.
 
-You need **Node.js 22.12+**, **git** and **one coding agent** you are signed in to – GitHub Copilot CLI,
-Claude Code, Codex, Cursor, OpenCode, Gemini CLI… The skills are already inside this repository, so there is
-nothing to install for them.
+Your coding agent knows React. It has never seen **your** component library, **your** architecture or **your**
+way of integrating backends, so it writes plausible code against an API it imagined. In this hour you give it
+that knowledge – as documentation and **skills** – and take one feature from specification to verified screen.
 
-```bash
-git clone https://github.com/donorlin/noc-workshop.git
-cd noc-workshop/app
-npm install
-npm run dev          # http://localhost:5173 – the Organizer home page
-```
+| What you keep | How the agent keeps it |
+|---|---|
+| **Architecture** | `AGENTS.md` and `ARCHITECTURE.md` tell it where features, routes, API code and mocks live; a plan is reviewed before any code. |
+| **Design standards** | It builds only with the project's UI library and looks every component and pattern up in its docs; the mockup is checked in a browser. |
+| **Code quality** | Type check, lint and tests after every step; API code is generated, never hand-written; done means every acceptance criterion is met, with evidence. |
 
-Then start your agent in `app/` (`copilot`, `claude`, `codex`, …) in a second terminal. The specification lives
-one level up, in `../specification/`; approve that directory when the agent first asks to read it.
+> **Agentic engineering is not "let the AI do it".** Skills make the agent repeat the workflows the team
+> trusts. You still own the specification, the review and the merge.
 
-Playwright is a dev dependency; the agent downloads its browser itself the first time it looks at the app.
+## Before you come – set up your laptop
+
+Bring your own laptop, **set up at home** – there is no time for installs in the room.
+
+- [ ] **Node.js 22.12 or newer** – check with `node -v`.
+- [ ] **git** – check with `git --version`.
+- [ ] **One AI coding agent you are signed in to** – GitHub Copilot CLI, Claude Code, Codex, Cursor, OpenCode,
+      Gemini CLI or another one that supports [Agent Skills](https://agentskills.io).
+- [ ] **Clone the repository:**
+      `git clone https://github.com/donorlin/noc-workshop.git`
+- [ ] **Install the app:**
+      `cd noc-workshop/app` and `npm install`.
+- [ ] **Run it:**
+      `npm run dev` and open <http://localhost:5173> – you see the *Organizer* home page.
+- [ ] **Start your agent in `app/`** (`copilot`, `claude`, `codex`, …) in a second terminal and ask:
+      `Which skills are available in this project?` – it lists `noc-api`, `noc-screen`, `noc-ui-docs` and
+      `playwright-cli`.
+
+Good to know:
+
+- **Nothing else to install.** The skills are part of the repository, and Playwright is a dev dependency – the
+  agent downloads its browser itself the first time it looks at the app.
+- **The specification is one level up**, in `../specification/`. Approve that directory when the agent first
+  asks to read it.
+- **Falling behind is fine.** Every step has a branch: `git switch step-1-api`, `step-2-list`, `solution`.
 
 ## What is in this repository
 
@@ -65,14 +85,14 @@ noc-workshop/
 
 ## Plan of the hour
 
-|  Time | Module | What happens |
-|------:|--------|--------------|
-|  0–10 | [01 · Platform and skills](workshop/01-platform-and-skills.md) | Why agents need platform knowledge; instructions vs. skills; how skills are shared. |
-| 10–20 | [02 · Understand and plan](workshop/02-understand-and-plan.md) | Read the spec and the mockup, find the gaps, plan in steps. |
-| 20–50 | [03 · Build](workshop/03-build.md) | API layer from the contract, then the list screen from spec + mockup. |
-| 50–60 | [04 · Verify](workshop/04-verify.md) | Acceptance criteria with evidence. Homework: the detail screen. |
+You follow along on your laptop; the presenter runs the same prompts on the screen.
 
-Behind at any point? Every step has a branch: `git switch step-1-api`, `step-2-list`, `solution`.
+|          Time | Module | What happens |
+|--------------:|--------|--------------|
+| 18:00 – 18:10 | [01 · Platform and skills](workshop/01-platform-and-skills.md) | Why agents need platform knowledge; instructions vs. skills; how skills are shared. |
+| 18:10 – 18:20 | [02 · Understand and plan](workshop/02-understand-and-plan.md) | Read the spec and the mockup, find the gaps, plan in steps. |
+| 18:20 – 18:50 | [03 · Build](workshop/03-build.md) | API layer from the contract, then the list screen from spec + mockup. |
+| 18:50 – 19:00 | [04 · Verify](workshop/04-verify.md) | Acceptance criteria with evidence. Homework: the detail screen. |
 
 ## Credits
 
