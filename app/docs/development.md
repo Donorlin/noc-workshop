@@ -33,5 +33,5 @@ npm run check:types && npm run lint && npm test
 
 ## Working with a feature spec
 
-Specifications live in `specs/<feature>/`: an overview with acceptance criteria (`README.md`), one file per
+Specifications live outside the app, in `../specification/<feature>/`: an overview with acceptance criteria (`README.md`), one file per
 screen, mockups in `mockups/` and the OpenAPI contract. Where the mockup and the text disagree, the text wins.

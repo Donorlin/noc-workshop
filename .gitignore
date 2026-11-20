@@ -1,8 +1,2 @@
-node_modules
-dist
 .DS_Store
-coverage
 .idea
-.env.local
-.playwright-cli
-skills-lock.json

@@ -13,7 +13,7 @@
 
 # 04 · Verify
 
-**Time:** 50–60 minutes · [Previous](03-build.md) | [Overview](README.md)
+**Time:** 50–60 minutes · [Previous](03-build.md) | [Overview](../README.md)
 
 ## 1. Generated is not done
 
@@ -29,7 +29,7 @@ verify, citing the file and line or the browser check that proves it. Don't chan
 
 ## 2. Take it home
 
-1. **Homework – the detail screen.** `Build the session detail screen from specs/programme/02-session-detail.md.`
+1. **Homework – the detail screen.** `Build the session detail screen from ../specification/programme/02-session-detail.md.`
    It adds dependent requests (session, then its speakers), a partial failure (`/programme/s-ai-agents`) and
    a 404 (`/programme/does-not-exist`). Compare with `git diff solution`.
 2. **For your own platform:**
@@ -43,4 +43,4 @@ verify, citing the file and line or the browser check that proves it. Don't chan
 | Workflows as skills | `noc-api`, `noc-screen` | One skill per repeated workflow; share via a marketplace |
 | A human in the loop | spec, plan review, acceptance criteria | Keep the decisions with people |
 
-[Previous](03-build.md) | [Overview](README.md)
+[Previous](03-build.md) | [Overview](../README.md)

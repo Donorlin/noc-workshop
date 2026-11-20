@@ -19,18 +19,18 @@
 
 # 02 · Understand and plan
 
-**Time:** 10–20 minutes · [Previous](01-platform-and-skills.md) | [Overview](README.md) | [Next: Build](03-build.md)
+**Time:** 10–20 minutes · [Previous](01-platform-and-skills.md) | [Overview](../README.md) | [Next: Build](03-build.md)
 
 ## 1. The ticket
 
-**PROG-12 – Programme management** in `specs/programme/`: an overview with acceptance criteria
+**PROG-12 – Programme management** in `../specification/programme/`: an overview with acceptance criteria
 (`README.md`), the list screen (`01-programme-list.md`), the detail screen (`02-session-detail.md`), mockups
 and the OpenAPI contract. Today you build the API layer and the **list**; the detail is homework.
 
 ## 2. Read, compare, question
 
 ```text
-We are going to build the feature specified in specs/programme/. Don't code yet. Read all files, including
+We are going to build the feature specified in ../specification/programme/. Don't code yet. Read all files, including
 the mockup images and the OpenAPI contract, then:
 1. summarize the list screen in your own words – data, filters, states, what survives navigation;
 2. list every difference between mockups/01-programme-list.png and 01-programme-list.md;
@@ -65,4 +65,4 @@ Review it like a teammate's plan: does every step end with a check you can run? 
 (`noc-api`, `noc-screen`) instead of hand-writing what they do? Does it add dependencies (`AGENTS.md`
 forbids that)?
 
-[Previous](01-platform-and-skills.md) | [Overview](README.md) | [Next: Build](03-build.md)
+[Previous](01-platform-and-skills.md) | [Overview](../README.md) | [Next: Build](03-build.md)

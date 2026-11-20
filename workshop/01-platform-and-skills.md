@@ -13,7 +13,7 @@
 
 # 01 · Platform and skills
 
-**Time:** 0–10 minutes · [Overview](README.md) | [Next: Understand and plan](02-understand-and-plan.md)
+**Time:** 0–10 minutes · [Overview](../README.md) | [Next: Understand and plan](02-understand-and-plan.md)
 
 ## 1. The gap
 
@@ -60,4 +60,4 @@ The format underneath is the open [Agent Skills](https://agentskills.io) standar
 every agent. Plugins can also carry **subagents**, e.g. a docs researcher that reads in its own context, or a
 read-only design reviewer.
 
-[Overview](README.md) | [Next: Understand and plan](02-understand-and-plan.md)
+[Overview](../README.md) | [Next: Understand and plan](02-understand-and-plan.md)

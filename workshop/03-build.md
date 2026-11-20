@@ -13,7 +13,7 @@
 
 # 03 · Build
 
-**Time:** 20–50 minutes · [Previous](02-understand-and-plan.md) | [Overview](README.md) | [Next: Verify](04-verify.md)
+**Time:** 20–50 minutes · [Previous](02-understand-and-plan.md) | [Overview](../README.md) | [Next: Verify](04-verify.md)
 
 ## 1. API layer (≈ 6 minutes of agent time)
 
@@ -57,4 +57,4 @@ Checkpoint: `npm run check:types && npm run lint && npm test`, commit. Behind? `
 **Takeaways:** the skill enforces the research step people skip under time pressure · the library documents
 *patterns*, so the agent doesn't invent where state lives · compiling isn't rendering – look at the screen.
 
-[Previous](02-understand-and-plan.md) | [Overview](README.md) | [Next: Verify](04-verify.md)
+[Previous](02-understand-and-plan.md) | [Overview](../README.md) | [Next: Verify](04-verify.md)

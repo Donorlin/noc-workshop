@@ -53,7 +53,7 @@ Every backend API is described by an OpenAPI contract and generated with orval:
 src/api/
 ├── http-client.ts            # the one fetch wrapper; throws ApiError with `status` for non-2xx
 └── <name>/
-    ├── openapi.yaml          # contract (copied from specs/, validated by redocly)
+    ├── openapi.yaml          # contract (copied from ../specification/, validated by redocly)
     └── generated/            # orval output – TanStack Query hooks + types. Never edit.
 ```
 

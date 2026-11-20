@@ -8,13 +8,10 @@ NoC Organizer – React application built on the NoC platform (`@donorlin/noc-ui
 - [ARCHITECTURE.md](ARCHITECTURE.md) – features and routing, data loading, API layer, mocks
 - [docs/](docs) – [development](docs/development.md), [conventions](docs/conventions.md),
   [API and mocks](docs/api-and-mocks.md), [testing](docs/testing.md)
-- [specs/](specs) – functional specifications of features (the "tickets"). They are authoritative for
+- [../specification/](../specification) – functional specifications of features (the "tickets"). They are authoritative for
   behaviour, texts and acceptance criteria.
 
 Read the relevant documents before changing code. Do not start coding until you know where the change fits.
-
-`workshop/` is the participant guide of a workshop about this repository. It is not project documentation:
-never use it as context for a task.
 
 ## Skills
 
