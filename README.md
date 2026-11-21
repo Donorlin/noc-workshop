@@ -66,7 +66,8 @@ Good to know:
   agent downloads its browser itself the first time it looks at the app.
 - **The specification is one level up**, in `../specification/`. Approve that directory when the agent first
   asks to read it.
-- **Claude Code on Windows:** the skills reach Claude through the symlink `app/.claude/skills`. Enable
+- **Claude Code on Windows:** Claude reads `AGENTS.md` by itself, but loads skills only from `.claude/skills`,
+  which in this repository is a symlink to `app/.agents/skills`. Enable
   Developer Mode in Windows settings and clone with
   `git clone -c core.symlinks=true https://github.com/donorlin/noc-workshop.git`. Other agents read
   `app/.agents/skills` directly and need nothing extra.
@@ -80,7 +81,7 @@ noc-workshop/
 ├── workshop/                     # modules 01–04 and the presenter guide
 ├── specification/programme/      # the ticket: specification, mockups, OpenAPI contract
 └── app/                          # the application – start your agent here
-    ├── AGENTS.md                 #   short rules every agent reads (CLAUDE.md links to it)
+    ├── AGENTS.md                 #   short rules every agent reads (Claude Code reads it too)
     ├── ARCHITECTURE.md, docs/    #   how the app is built – for people and agents
     ├── .agents/skills/           #   the platform's skills (.claude/skills links here)
     │   ├── noc-ui-docs/          #     look up the UI library in its docs
