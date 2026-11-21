@@ -44,6 +44,10 @@ Bring your own laptop, **set up at home** – there is no time for installs in t
 
 - [ ] **Node.js 22.12 or newer** – check with `node -v`.
 - [ ] **git** – check with `git --version`.
+- [ ] **An IDE or editor of your choice** – VS Code, IntelliJ IDEA / WebStorm, Cursor, Zed, … You use it to read
+      the specification and review what the agent changes.
+- [ ] **A terminal of your choice** – Terminal or iTerm on macOS, any shell on Linux, PowerShell, Windows
+      Terminal or Git Bash on Windows (WSL works too). All commands below are the same in every one of them.
 - [ ] **One AI coding agent you are signed in to** – GitHub Copilot CLI, Claude Code, Codex, Cursor, OpenCode,
       Gemini CLI or another one that supports [Agent Skills](https://agentskills.io).
 - [ ] **Clone the repository:**
@@ -62,6 +66,10 @@ Good to know:
   agent downloads its browser itself the first time it looks at the app.
 - **The specification is one level up**, in `../specification/`. Approve that directory when the agent first
   asks to read it.
+- **Claude Code on Windows:** the skills reach Claude through the symlink `app/.claude/skills`. Enable
+  Developer Mode in Windows settings and clone with
+  `git clone -c core.symlinks=true https://github.com/donorlin/noc-workshop.git`. Other agents read
+  `app/.agents/skills` directly and need nothing extra.
 - **Falling behind is fine.** Every step has a branch: `git switch step-1-api`, `step-2-list`, `solution`.
 
 ## What is in this repository

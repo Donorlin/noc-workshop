@@ -15,7 +15,7 @@ Read the relevant documents before changing code. Do not start coding until you 
 
 ## Skills
 
-Project skills live in `.agents/skills/` (`.claude/skills` links to it):
+Project skills live in `.agents/skills/` (`.claude/skills` is a symlink to it):
 
 - `noc-ui-docs` – look up `@donorlin/noc-ui` in the docs shipped with the package
 - `noc-api` – OpenAPI contract → validated → generated TanStack Query hooks → MSW mocks
