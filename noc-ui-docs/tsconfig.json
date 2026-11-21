@@ -1,0 +1,5 @@
+{
+  "extends": "@docusaurus/tsconfig",
+  "compilerOptions": { "strict": true, "noEmit": true, "ignoreDeprecations": "6.0" },
+  "exclude": [".docusaurus", "build"]
+}

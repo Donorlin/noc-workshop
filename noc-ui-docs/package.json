@@ -1,0 +1,47 @@
+{
+  "name": "noc-ui-docs",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Documentation website of @donorlin/noc-ui, rendered from app/packages/noc-ui/docs.",
+  "scripts": {
+    "start": "npm run build:showcase && docusaurus start",
+    "build": "npm run build:showcase && docusaurus build",
+    "serve": "docusaurus serve",
+    "build:showcase": "node scripts/build-showcase.mjs",
+    "clear": "docusaurus clear",
+    "typecheck": "tsc"
+  },
+  "engines": {
+    "node": ">=22.12"
+  },
+  "browserslist": {
+    "production": [
+      ">0.5%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 3 chrome version",
+      "last 3 firefox version",
+      "last 5 safari version"
+    ]
+  },
+  "dependencies": {
+    "@docusaurus/core": "^3.10.2",
+    "@docusaurus/preset-classic": "^3.10.2",
+    "@easyops-cn/docusaurus-search-local": "^0.55.3",
+    "@fontsource-variable/montserrat": "^5.3.0",
+    "@fontsource-variable/parkinsans": "^5.3.0",
+    "@mdx-js/react": "^3.1.1",
+    "clsx": "^2.1.1",
+    "prism-react-renderer": "^2.4.1",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@docusaurus/module-type-aliases": "^3.10.2",
+    "@docusaurus/tsconfig": "^3.10.2",
+    "@docusaurus/types": "^3.10.2",
+    "typescript": "~6.0.3"
+  }
+}

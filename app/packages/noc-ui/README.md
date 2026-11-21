@@ -28,6 +28,9 @@ docs/
 └── utilities/               # formatting, empty values
 ```
 
+People: browse them as a website – [`noc-ui-docs/`](../../../noc-ui-docs/README.md) at the repository root
+renders these pages with Docusaurus.
+
 Coding agents: start at `docs/llms.txt` and read the pages relevant to your task before writing code. The
 `noc-ui-docs` skill of this repository does that.
 

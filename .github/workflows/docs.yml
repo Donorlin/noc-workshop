@@ -1,0 +1,50 @@
+name: noc-ui docs
+
+on:
+  push:
+    branches: [main]
+    paths: ["app/packages/noc-ui/**", "noc-ui-docs/**", ".github/workflows/docs.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            app/package-lock.json
+            noc-ui-docs/package-lock.json
+      - run: npm ci
+        working-directory: app
+      - run: npm ci
+        working-directory: noc-ui-docs
+      - run: npm run build
+        working-directory: noc-ui-docs
+        env:
+          DOCS_BASE_URL: /${{ github.event.repository.name }}/
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: noc-ui-docs/build
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

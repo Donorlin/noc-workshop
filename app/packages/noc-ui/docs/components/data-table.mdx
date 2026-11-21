@@ -50,7 +50,7 @@ Define `columns` **outside the component** (or with `useMemo`) so they are not r
 | `loading`          | `boolean`                               | `false`                 | No data yet → skeleton rows. With data → dims rows while refreshing (keeps them visible). |
 | `emptyState`       | `ReactNode`                             | `<EmptyState title="No results" />` | Shown when `data` is empty. |
 | `showResultCount`  | `boolean`                               | `true`                  | "23 results" above the table. |
-| `resultCountLabel` | `(count) => ReactNode`                  | `` `${count} results` `` | Custom wording, e.g. `(n) => \`Sessions found: ${n}\``. |
+| `resultCountLabel` | `(count) => ReactNode`                  | `` `${count} results` `` | Custom wording, e.g. `` (n) => `Sessions found: ${n}` ``. |
 | `caption`          | `string`                                |                         | Visually hidden caption for screen readers. |
 
 ## Columns

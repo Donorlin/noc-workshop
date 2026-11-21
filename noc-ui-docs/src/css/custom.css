@@ -1,0 +1,97 @@
+@import "@fontsource-variable/montserrat/wght.css";
+@import "@fontsource-variable/parkinsans/wght.css";
+
+/* Night of Chances theme – the same values as app/packages/noc-ui/src/styles/tokens.css. */
+:root {
+  --ifm-color-primary: #007a74;
+  --ifm-color-primary-dark: #006e68;
+  --ifm-color-primary-darker: #006862;
+  --ifm-color-primary-darkest: #005551;
+  --ifm-color-primary-light: #008680;
+  --ifm-color-primary-lighter: #008c86;
+  --ifm-color-primary-lightest: #009f97;
+  --ifm-background-color: #faf9f6;
+  --ifm-font-color-base: #252835;
+  --ifm-font-family-base: "Montserrat Variable", system-ui, sans-serif;
+  --ifm-heading-font-family: "Parkinsans Variable", system-ui, sans-serif;
+  --ifm-heading-font-weight: 650;
+  --ifm-font-size-base: 15px;
+  --ifm-line-height-base: 1.65;
+  --ifm-code-font-size: 88%;
+  --ifm-navbar-background-color: #292c39;
+  --ifm-navbar-link-color: #ffffff;
+  --ifm-navbar-link-hover-color: #80e3cf;
+  --ifm-footer-background-color: #252835;
+  --ifm-global-radius: 4px;
+  --ifm-table-stripe-background: transparent;
+  --docusaurus-highlighted-code-line-bg: rgb(0 0 0 / 8%);
+}
+
+[data-theme="dark"] {
+  --ifm-color-primary: #80e3cf;
+  --ifm-color-primary-dark: #62dcc3;
+  --ifm-color-primary-darker: #53d8bd;
+  --ifm-color-primary-darkest: #2dc6a7;
+  --ifm-color-primary-light: #9eeadb;
+  --ifm-color-primary-lighter: #adede1;
+  --ifm-color-primary-lightest: #dbf7f1;
+  --ifm-background-color: #1d1f29;
+  --ifm-background-surface-color: #252835;
+  --ifm-font-color-base: #e8e8ea;
+  --ifm-navbar-background-color: #292c39;
+  --docusaurus-highlighted-code-line-bg: rgb(255 255 255 / 10%);
+}
+
+.navbar {
+  border-bottom: 4px solid #00b2a9;
+  box-shadow: none;
+}
+.navbar__title {
+  font-family: var(--ifm-heading-font-family);
+  font-weight: 650;
+  color: #fff;
+}
+.navbar .navbar__toggle,
+.navbar .clean-btn {
+  color: #fff;
+}
+.navbar__link--active {
+  color: #80e3cf;
+}
+
+h1,
+h2,
+h3 {
+  letter-spacing: -0.4px;
+}
+.markdown h1:first-child {
+  font-size: 2.6rem;
+  letter-spacing: -1.2px;
+}
+
+.markdown table {
+  display: table;
+  width: 100%;
+  font-size: 0.9rem;
+}
+.markdown table thead tr {
+  background: #292c39;
+  color: #fff;
+}
+[data-theme="dark"] .markdown table thead tr {
+  background: #343849;
+}
+.markdown table th {
+  font-size: 0.75rem;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  border-color: transparent;
+}
+
+.menu__link--active:not(.menu__link--sublist) {
+  border-left: 3px solid var(--ifm-color-primary);
+}
+
+.footer--dark {
+  border-top: 4px solid #00b2a9;
+}

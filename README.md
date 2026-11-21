@@ -80,6 +80,7 @@ noc-workshop/
 ├── README.md                     # this page
 ├── workshop/                     # modules 01–04 and the presenter guide
 ├── specification/programme/      # the ticket: specification, mockups, OpenAPI contract
+├── noc-ui-docs/                 # Docusaurus website of the UI library (optional, not needed for the workshop)
 └── app/                          # the application – start your agent here
     ├── AGENTS.md                 #   short rules every agent reads (Claude Code reads it too)
     ├── ARCHITECTURE.md, docs/    #   how the app is built – for people and agents
