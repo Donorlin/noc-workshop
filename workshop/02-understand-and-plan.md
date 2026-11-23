@@ -19,7 +19,7 @@
 
 # 02 · Understand and plan
 
-**Time:** 18:10 – 18:20 · [Previous: The NoC platform](01-platform-and-skills.md) | [Overview](../README.md) | [Next: Build](03-build.md)
+**Time:** 18:10 – 18:20 · [Previous: The NoC platform](01-platform-and-skills.md) | [Overview](../README.md) | [Glossary](glossary.md) | [Next: Build](03-build.md)
 
 ## 1. The ticket
 

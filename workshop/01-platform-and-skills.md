@@ -19,7 +19,7 @@
 
 # 01 · The NoC platform and its skills
 
-**Time:** 18:00 – 18:10 · [Overview](../README.md) | [Next: Understand and plan](02-understand-and-plan.md)
+**Time:** 18:00 – 18:10 · [Overview](../README.md) | [Glossary](glossary.md) | [Next: Understand and plan](02-understand-and-plan.md)
 
 ## 1. Meet the NoC platform
 

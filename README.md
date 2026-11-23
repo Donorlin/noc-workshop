@@ -78,7 +78,7 @@ Good to know:
 ```text
 noc-workshop/
 ├── README.md                     # this page
-├── workshop/                     # modules 01–04
+├── workshop/                     # modules 01–04 + glossary
 ├── specification/programme/      # the ticket: specification, mockups, OpenAPI contract
 ├── platform-docs/                 # Docusaurus website of the UI library (optional, not needed for the workshop)
 └── app/                          # the application – start your agent here
@@ -96,6 +96,9 @@ noc-workshop/
 ## Plan of the hour
 
 You follow along on your laptop; the presenter runs the same prompts on the screen.
+
+New to a term like *OpenAPI*, *mock* or *skill*? Every technical word is explained in the
+[glossary](workshop/glossary.md).
 
 |          Time | Module | What happens |
 |--------------:|--------|--------------|

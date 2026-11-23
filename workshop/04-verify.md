@@ -13,7 +13,7 @@
 
 # 04 · Verify
 
-**Time:** 18:50 – 19:00 · [Previous](03-build.md) | [Overview](../README.md)
+**Time:** 18:50 – 19:00 · [Previous](03-build.md) | [Overview](../README.md) | [Glossary](glossary.md)
 
 ## 1. Generated is not done
 
