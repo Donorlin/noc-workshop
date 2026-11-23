@@ -23,8 +23,10 @@ speakers.
 - Main navigation item **Programme**.
 - Screen [Programme list](01-programme-list.md) at `/programme`.
 - Screen [Session detail](02-session-detail.md) at `/programme/{sessionId}`.
-- Integration of the Programme API: `searchSessions`, `getSession`, `getSpeaker`.
-- Mocks of all three operations for local development, including the error cases in [section 5](#5-test-data-and-mocks).
+
+**Already done** – the app already integrates the Programme API: hooks generated from the contract for
+`searchSessions`, `getSession` and `getSpeaker` (`app/src/api/programme/`) and mocks of all three operations with
+the test data of [section 5](#5-test-data-and-mocks) (`app/src/mocks/programme/`). Use them; don't regenerate them.
 
 **Out of scope** (visible in the UI, but disabled with the tooltip `Coming soon`)
 
@@ -58,7 +60,7 @@ Header: Home · Programme
 
 ## 5. Test data and mocks
 
-Mocks must make every state of both screens reachable in the browser. All data is fictional.
+The mocks in the app make every state of both screens reachable in the browser. All data is fictional.
 
 - At least **25 sessions** on 25 November 2026 between 17:00 and 22:00 (time zone `+01:00`), covering all
   types, rooms and tracks.
@@ -73,20 +75,20 @@ Mocks must make every state of both screens reachable in the browser. All data i
 
 ## 6. Acceptance criteria
 
+**Programme list**
+
 | ID    | Criterion |
 |-------|-----------|
-| AC-01 | The header contains the navigation item **Programme**; it opens `/programme` and is highlighted there. |
-| AC-02 | The list shows the eyebrow, title and description of [section 1 of the list](01-programme-list.md#1-page) and the action **New session**, disabled, with the tooltip `Coming soon`. |
-| AC-03 | Opening the list loads the first page of all sessions without any user action: 10 rows per page, ordered by start time, with the result count. |
-| AC-04 | Filters apply automatically about 400 ms after the last change; there is no search button. **Reset** restores the defaults and reloads the results. |
-| AC-05 | A title filter with 1 character shows `Enter at least 2 characters` and does not search; the previous results stay visible. |
-| AC-06 | Type, Room and Only with free spots filter the results and combine with each other and with the title. |
-| AC-07 | The table shows the columns, tags and values of [section 3 of the list](01-programme-list.md#3-results-table); sessions without registration show `–` as free spots. |
-| AC-08 | A search without results shows `No sessions match your filters`. |
-| AC-09 | Clicking a row, or pressing Enter on a focused row, opens `/programme/{sessionId}` of that session. |
-| AC-10 | The detail shows the **Session** section with all fields of [section 2 of the detail](02-session-detail.md#2-session-section); missing values show `–`. |
-| AC-11 | Speakers load after the session, in the order of `speakerIds`. If a speaker cannot be loaded, the section shows the warning `Some speaker details could not be loaded`, and the session and the other speakers are still shown. |
-| AC-12 | **Back**, the breadcrumb **Programme** and the browser back button return to the list with the same filters and page. Reloading the list keeps its filters and page. |
-| AC-13 | An unknown session shows `Session not found` with a link **Back to programme**. |
-| AC-14 | While data loads, skeletons are shown. A failed list or detail request shows an error with **Try again**. |
-| AC-15 | **Edit session** on the detail is disabled with the tooltip `Coming soon`. |
+| AC-01 | The header contains the navigation item **Programme**, which opens `/programme`. The list shows the eyebrow, title and description of [section 1 of the list](01-programme-list.md#1-page) and the action **New session**, disabled, with the tooltip `Coming soon`. |
+| AC-02 | Opening the list loads the first page without any user action: 10 rows ordered by start time, the result count, and the columns, tags and values of [section 3 of the list](01-programme-list.md#3-results-table). |
+| AC-03 | Filters apply automatically about 400 ms after the last change and combine with each other; there is no search button. A title with 1 character shows `Enter at least 2 characters` and does not search. **Reset** restores the defaults. |
+| AC-04 | While data loads, skeletons are shown. A search without results shows `No sessions match your filters`; a failed request shows an error with **Try again**. |
+| AC-05 | Filters and page are kept in the URL, so a reload and the browser back button keep them. Clicking a row, or pressing Enter on a focused row, opens `/programme/{sessionId}`. |
+
+**Session detail** (homework)
+
+| ID    | Criterion |
+|-------|-----------|
+| AC-06 | The detail shows the **Session** section with all fields of [section 2 of the detail](02-session-detail.md#2-session-section) (missing values show `–`) and **Edit session**, disabled, with the tooltip `Coming soon`. |
+| AC-07 | Speakers load after the session, in the order of `speakerIds`. If a speaker cannot be loaded, the section shows the warning `Some speaker details could not be loaded`, and the session and the other speakers are still shown. |
+| AC-08 | **Back** and the breadcrumb **Programme** return to the list with the same filters and page. An unknown session shows `Session not found` with a link **Back to programme**. |

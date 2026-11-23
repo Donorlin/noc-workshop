@@ -6,7 +6,7 @@ description: >-
   data loading, navigation, states), look each up in the platform docs (noc-platform-docs skill), present a plan,
   write the code on the generated API hooks, and check the result in a real browser (playwright-cli skill).
   Use whenever the user wants to implement, build or code a screen, page or feature UI – "build the list
-  screen", "implement 01-programme-list.md", "code this mockup", "continue with step two" – even if they don't
+  screen", "implement 01-programme-list.md", "code this mockup", "start with step one" – even if they don't
   name the platform.
 ---
 

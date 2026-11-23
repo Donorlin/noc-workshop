@@ -44,7 +44,7 @@ you where you meet each one.
 |---|---|---|
 | **Functional specification** | A document describing *what* a feature must do – screens, fields, rules, texts, errors – without saying how to code it. In companies it is often a "ticket". | `specification/programme/`. |
 | **Mockup** | A picture of how a screen should look, made by a designer. Not code, just the visual target. | `specification/programme/mockups/`. |
-| **Acceptance criteria (AC)** | A numbered list of checks that must all pass before the feature counts as done (`AC-01` … `AC-15`). | Module 04 – verify each one with evidence. |
+| **Acceptance criteria (AC)** | A numbered list of checks that must all pass before the feature counts as done (`AC-01` … `AC-08`). | Module 04 – verify the list's with evidence. |
 | **Non-functional requirement (NFR)** | A requirement about *how well* something works rather than what it does – speed, accessibility, which libraries to use. | `NFR-1` … `NFR-5` in the spec. |
 | **Design system** | A company's shared set of components, colours, fonts and rules, so all its apps look and behave the same. | `@noc/platform` is one. |
 | **Code review** | Another person (or you) reads a change before it is accepted, looking for mistakes. | You review the agent's plans and diffs. |
@@ -81,8 +81,8 @@ you where you meet each one.
 | **JSON** | The text format APIs use to send data: `{ "title": "AI agents", "freeSpots": 4 }`. | Every response. |
 | **OpenAPI (contract)** | A standard YAML/JSON file that describes an API completely – every endpoint, parameter, response and error. Frontend and backend teams agree on it first, then build in parallel. | `programme-openapi.yaml`. |
 | **`operationId`** | The name of one operation in an OpenAPI file, e.g. `searchSessions`; generated code is named after it. | `searchSessions`, `getSession`, `getSpeaker`. |
-| **Schema validation (Redocly)** | Checking that an OpenAPI file is correct before using it. Redocly is the tool. | `npm run validate:schema`. |
-| **Code generation (orval)** | Writing code automatically from the contract instead of by hand – orval turns the OpenAPI file into typed TanStack Query hooks. Generated code is never edited by hand. | `npm run generate:api` → `src/api/programme/generated/`. |
+| **Schema validation (Redocly)** | Checking that an OpenAPI file is correct before using it. Redocly is the tool. | Part of the `noc-api` skill – already done for the Programme API. |
+| **Code generation (orval)** | Writing code automatically from the contract instead of by hand – orval turns the OpenAPI file into typed TanStack Query hooks. Generated code is never edited by hand. | Already done for you – `src/api/programme/generated/`. |
 | **HTTP client** | The one function that actually sends requests (`fetch`) – all generated code uses it, so errors are handled the same everywhere. | `src/api/http-client.ts`. |
 | **Gateway** | A single entry point in front of all backends; the app calls `/api/<name>/…` and the gateway forwards it. | Every URL starts with `/api/programme`. |
 | **Mock / Mock Service Worker (MSW)** | A *mock* is a fake backend answer. MSW intercepts the app's requests in the browser (and in tests) and returns mock data, so you can build screens before the real backend exists. | `src/mocks/programme/`. |
@@ -97,8 +97,8 @@ you where you meet each one.
 | **Node.js** | Runs JavaScript outside the browser; all the tools here (Vite, tests, the agent's helpers) run on it. | Version 22.12 or newer. |
 | **npm, package, dependency** | *npm* installs JavaScript *packages* (libraries). The packages a project needs are its *dependencies*, listed in `package.json`; *dev dependencies* are only needed while developing (tests, tools). | `npm install`. |
 | **npm workspace / monorepo** | One repository holding several packages that use each other directly. Here the app and the platform library live together. | `app/packages/platform`. |
-| **git: clone, branch, commit, diff** | *Clone* copies a repository to your laptop. A *branch* is a separate line of work. A *commit* saves a set of changes. A *diff* shows exactly what changed. | Checkpoint branches `step-1-api`, `step-2-list`, `solution`. |
-| **Checkpoint branch** | A branch with the finished state of one step, so anyone who falls behind can continue from there. | `git switch step-2-list`. |
+| **git: clone, branch, commit, diff** | *Clone* copies a repository to your laptop. A *branch* is a separate line of work. A *commit* saves a set of changes. A *diff* shows exactly what changed. | Checkpoint branches `list-screen` and `solution`. |
+| **Checkpoint branch** | A branch with the finished state of one step, so anyone who falls behind can continue from there. | `git switch list-screen`. |
 | **Lint (ESLint)** | A tool that scans code for common mistakes and bad patterns. | `npm run lint`. |
 | **Tests (Vitest, Testing Library)** | Code that checks other code automatically – e.g. "typing `ai` shows 4 sessions". | `npm test`. |
 | **Playwright** | A tool that controls a real browser from code – clicks, types, takes screenshots. The agent uses it to look at the app. | The `playwright-cli` skill. |

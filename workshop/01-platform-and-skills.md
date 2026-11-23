@@ -58,7 +58,8 @@ Open `app/packages/platform/docs/llms.txt` now – this one file tells an agent 
 
 ### 1.2. An application on the platform
 
-The `app/` folder is such an application – the Organizer, with only a home page so far. Open
+The `app/` folder is such an application – the Organizer, with a home page and the Programme API already integrated (generated hooks and mocks) – a
+brownfield project, like most real work. The screens are yours to build. Open
 `app/ARCHITECTURE.md` and notice the rules an agent has to follow to fit in: one folder per feature in
 `src/features/`, registered in `src/features/index.ts`; state that survives navigation in the URL; generated API
 code never edited by hand; mocks as part of every feature; type check, lint and tests after every change.
@@ -106,7 +107,8 @@ flowchart LR
     S -->|4 looks at it| W[playwright-cli]
 ```
 
-The API layer is a fixed pipeline inside one skill, so nobody skips validation or edits generated code:
+The API layer is a fixed pipeline inside one skill, so nobody skips validation or edits generated code. The
+Programme API in `app/src/api/programme/` was built this way before you arrived:
 
 ```mermaid
 flowchart LR

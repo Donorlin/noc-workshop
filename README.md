@@ -71,7 +71,8 @@ Good to know:
   Developer Mode in Windows settings and clone with
   `git clone -c core.symlinks=true https://github.com/donorlin/noc-workshop.git`. Other agents read
   `app/.agents/skills` directly and need nothing extra.
-- **Falling behind is fine.** Every step has a branch: `git switch step-1-api`, `step-2-list`, `solution`.
+- **Falling behind is fine.** `git stash -u && git switch list-screen` gives you the finished list,
+  `solution` the whole feature.
 
 ## What is in this repository
 
@@ -89,7 +90,7 @@ noc-workshop/
     │   ├── noc-api/              #     OpenAPI contract → hooks → mocks
     │   ├── noc-screen/           #     spec + mockup → screen, checked in the browser
     │   └── playwright-cli/       #     browser automation (from Microsoft)
-    ├── src/                      #   the app code – the feature doesn't exist yet
+    ├── src/                      #   the app code – the Programme API exists, its screens don't
     └── packages/platform/          #   the UI platform library – source, docs/ for agents, playground
 ```
 
@@ -97,15 +98,16 @@ noc-workshop/
 
 You follow along on your laptop; the presenter runs the same prompts on the screen.
 
-New to a term like *OpenAPI*, *mock* or *skill*? Every technical word is explained in the
-[glossary](workshop/glossary.md).
+A word like *OpenAPI*, *mock* or *skill* stops you? Look it up in the [glossary](workshop/glossary.md) when you
+meet it – there is no need to read it ahead.
 
 |          Time | Module | What happens |
 |--------------:|--------|--------------|
 | 18:00 – 18:10 | [01 · The NoC platform and its skills](workshop/01-platform-and-skills.md) | Meet the fictional platform – UI library, app template, API and mocks – and the four skills that teach it to your agent. |
 | 18:10 – 18:20 | [02 · Understand and plan](workshop/02-understand-and-plan.md) | Read the spec and the mockup, find the gaps, plan in steps. |
-| 18:20 – 18:50 | [03 · Build](workshop/03-build.md) | API layer from the contract, then the list screen from spec + mockup. |
-| 18:50 – 19:00 | [04 · Verify](workshop/04-verify.md) | Acceptance criteria with evidence. Homework: the detail screen. |
+| 18:20 – 18:40 | [03 · Build](workshop/03-build.md) | The list screen from spec + mockup, on top of the app's existing Programme API. |
+| 18:40 – 18:50 | [04 · Verify](workshop/04-verify.md) | The list's acceptance criteria with evidence. Homework: the detail screen. |
+| 18:50 – 19:00 | Questions | Anything – the workshop, agents, your own platform. |
 
 ## Credits
 
