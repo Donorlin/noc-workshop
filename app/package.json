@@ -14,14 +14,14 @@
     "test": "vitest run",
     "validate:schema": "redocly lint",
     "generate:api": "orval",
-    "check:ui": "npm run check --workspace=@donorlin/noc-ui",
-    "dev:ui": "npm run dev --workspace=@donorlin/noc-ui"
+    "check:ui": "npm run check --workspace=@noc/platform",
+    "dev:ui": "npm run dev --workspace=@noc/platform"
   },
   "engines": {
     "node": ">=22.12"
   },
   "dependencies": {
-    "@donorlin/noc-ui": "*",
+    "@noc/platform": "*",
     "@tanstack/react-query": "^5.107.1",
     "lucide-react": "^1.73.0",
     "react": "^19.3.1",

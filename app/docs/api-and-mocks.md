@@ -41,7 +41,7 @@ hooks (`useGetSession`, …), query-option factories and model types from there.
 
 ## Errors
 
-`httpClient` throws `ApiError` for non-2xx responses; `getErrorStatus(error)` from noc-ui returns its
+`httpClient` throws `ApiError` for non-2xx responses; `getErrorStatus(error)` from @noc/platform returns its
 `status`. HTTP 404 is not retried (`src/app/queryClient.ts`).
 
 ## Mocks

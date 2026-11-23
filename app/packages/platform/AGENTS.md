@@ -1,4 +1,4 @@
-# AGENTS.md – @donorlin/noc-ui
+# AGENTS.md – @noc/platform
 
 Instructions for agents **maintaining** the library. Agents building application features: don't change
 this package – read `docs/llms.txt` instead.

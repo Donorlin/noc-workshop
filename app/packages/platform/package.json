@@ -1,5 +1,5 @@
 {
-  "name": "@donorlin/noc-ui",
+  "name": "@noc/platform",
   "version": "0.1.0",
   "private": true,
   "description": "Night of Chances UI platform library: opinionated React components, forms, tables and patterns built on Radix UI, TanStack Table and react-hook-form + zod, with documentation for humans and AI agents in docs/.",

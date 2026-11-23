@@ -18,7 +18,7 @@ src/features/<feature>/
 
 ## UI
 
-- Only `@donorlin/noc-ui` components. Check the docs (`packages/noc-ui/docs/llms.txt`)
+- Only `@noc/platform` components. Check the docs (`packages/platform/docs/llms.txt`)
   for the right component and pattern before writing a screen.
 - No CSS files in features, no inline styles, no hard-coded colours.
 - Icons from `lucide-react`.
@@ -38,5 +38,5 @@ src/features/<feature>/
 
 ## Dates and numbers
 
-Formatting helpers from noc-ui (`formatDate`, `formatTimeRange`, …). Missing values render as `–`
+Formatting helpers from @noc/platform (`formatDate`, `formatTimeRange`, …). Missing values render as `–`
 (`DescriptionList` and `DataTable` do it automatically).

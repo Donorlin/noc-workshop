@@ -1,4 +1,4 @@
-# @donorlin/noc-ui
+# @noc/platform
 
 > UI platform library of Night of Chances applications: opinionated React components, forms, tables and
 > patterns built on Radix UI, TanStack Table and react-hook-form + zod. Read the relevant page before
@@ -6,7 +6,7 @@
 
 ## Start here
 
-- [Getting started](getting-started.mdx): Install @donorlin/noc-ui, import the styles, render NocProvider and AppShell, and learn the rules every NoC application follows. Exports: NocProvider.
+- [Getting started](getting-started.mdx): Install @noc/platform, import the styles, render NocProvider and AppShell, and learn the rules every NoC application follows. Exports: NocProvider.
 
 ## Foundations
 

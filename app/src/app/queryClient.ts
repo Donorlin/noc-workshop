@@ -1,4 +1,4 @@
-import { getErrorStatus } from "@donorlin/noc-ui";
+import { getErrorStatus } from "@noc/platform";
 import { QueryClient } from "@tanstack/react-query";
 
 export const queryClient = new QueryClient({

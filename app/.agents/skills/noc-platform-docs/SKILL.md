@@ -1,18 +1,18 @@
 ---
-name: noc-ui-docs
+name: noc-platform-docs
 description: >-
-  Read the official @donorlin/noc-ui documentation in packages/noc-ui/docs, so code and answers match the
-  real API of the library instead of guesswork. Use whenever a task touches @donorlin/noc-ui – choosing a
+  Read the official @noc/platform documentation in packages/platform/docs, so code and answers match the
+  real API of the library instead of guesswork. Use whenever a task touches @noc/platform – choosing a
   component, layout, forms and validation with useNocForm and zod, live filters, DataTable, QueryState and
   data loading, list and detail screen patterns, design tokens, formatting – or when someone asks what a
-  noc-ui component does, which one to use, how something is done in a NoC application, or wants "the docs
-  for X". Reach for it even when docs aren't mentioned: if you are about to assume how a noc-ui API behaves,
+  platform component does, which one to use, how something is done in a NoC application, or wants "the docs
+  for X". Reach for it even when docs aren't mentioned: if you are about to assume how an @noc/platform API behaves,
   look it up.
 ---
 
-# @donorlin/noc-ui documentation
+# @noc/platform documentation
 
-`@donorlin/noc-ui` is the UI platform library of NoC applications, in `packages/noc-ui/` of this repository.
+`@noc/platform` is the UI platform library of NoC applications, in `packages/platform/` of this repository.
 No model has seen its API during training, so **everything comes from its documentation and source – never
 from memory.** The docs give you *intent and usage* (which component, which pattern, why); the source gives
 you *exact names*.
@@ -22,7 +22,7 @@ you *exact names*.
 Start at the index – one line per page, with a description and the exports the page documents:
 
 ```bash
-D=packages/noc-ui/docs
+D=packages/platform/docs
 grep -i "filter" $D/llms.txt                 # fastest way to the right page
 grep -rln "disabledReason" $D               # sweep for an exact prop or export
 ```
@@ -43,8 +43,8 @@ Doc pages are hand-written; the TypeScript source is what the app compiles again
 source wins:
 
 ```bash
-cat packages/noc-ui/src/index.ts                                   # every public export
-grep -rn "interface DataTableProps" -A 60 packages/noc-ui/src      # props with JSDoc and @default
+cat packages/platform/src/index.ts                                   # every public export
+grep -rn "interface DataTableProps" -A 60 packages/platform/src      # props with JSDoc and @default
 ```
 
 Copy union types whole (`ButtonVariant` is `"primary" | "dark" | "secondary" | "ghost" | "danger"`).
@@ -52,7 +52,7 @@ Use only what `src/index.ts` exports – never import from deeper paths.
 
 ## Rules
 
-- **Read, don't change.** The library belongs to the platform team; never edit `packages/noc-ui` while building
+- **Read, don't change.** The library belongs to the platform team; never edit `packages/platform` while building
   a feature. If it lacks something, say so.
 - Follow the rules in `getting-started.mdx` (library components instead of custom markup and CSS, tokens,
   `useNocForm` + zod, `QueryState`, `–` for empty values, `disabledReason`).

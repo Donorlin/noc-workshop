@@ -1,4 +1,4 @@
-# @donorlin/noc-ui
+# @noc/platform
 
 UI platform library of **Night of Chances** applications – opinionated React components, forms, tables and
 patterns built on [Radix UI](https://www.radix-ui.com/), [TanStack Table](https://tanstack.com/table) and
@@ -8,12 +8,12 @@ patterns built on [Radix UI](https://www.radix-ui.com/), [TanStack Table](https:
 It plays the role of a company's design system: an API no AI model has seen before, documented so that
 agents can read it.
 
-The library is an npm workspace of this repository. Applications depend on it with `"@donorlin/noc-ui": "*"`
+The library is an npm workspace of this repository. Applications depend on it with `"@noc/platform": "*"`
 and compile its TypeScript source directly – nothing is built or published.
 
 ```tsx
-import "@donorlin/noc-ui/styles.css";
-import { AppShell, NocProvider, Page } from "@donorlin/noc-ui";
+import "@noc/platform/styles.css";
+import { AppShell, NocProvider, Page } from "@noc/platform";
 ```
 
 ## Documentation
@@ -28,11 +28,11 @@ docs/
 └── utilities/               # formatting, empty values
 ```
 
-People: browse them as a website – [`noc-ui-docs/`](../../../noc-ui-docs/README.md) at the repository root
+People: browse them as a website – [`platform-docs/`](../../../platform-docs/README.md) at the repository root
 renders these pages with Docusaurus.
 
 Coding agents: start at `docs/llms.txt` and read the pages relevant to your task before writing code. The
-`noc-ui-docs` skill of this repository does that.
+`noc-platform-docs` skill of this repository does that.
 
 ## Development
 
@@ -43,7 +43,7 @@ npm run dev:ui       # playground with every component at http://localhost:5180
 npm run check:ui     # types, lint, tests, docs check (every export documented, links resolve, llms.txt current)
 ```
 
-Regenerate the index after changing a doc's frontmatter: `npm run check:docs -w @donorlin/noc-ui -- --write`.
+Regenerate the index after changing a doc's frontmatter: `npm run check:docs -w @noc/platform -- --write`.
 
 ## Credits
 

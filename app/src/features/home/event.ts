@@ -1,4 +1,4 @@
-import type { CardProps } from "@donorlin/noc-ui";
+import type { CardProps } from "@noc/platform";
 
 export const event = {
   name: "Night of Chances IT 2026",

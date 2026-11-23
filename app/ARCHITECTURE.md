@@ -1,7 +1,7 @@
 # Architecture
 
 Single-page React application. Vite builds it, React Router routes it, TanStack Query loads its data and
-`@donorlin/noc-ui` renders it. In development, Mock Service Worker answers every `/api` request.
+`@noc/platform` renders it. In development, Mock Service Worker answers every `/api` request.
 
 ## Features and routing
 
@@ -26,7 +26,7 @@ all features. Unknown paths render `NotFoundPage`; render errors render `ErrorPa
 
 Every screen is its own route and renders one `Page`. State the user expects to survive navigation, back
 and reload (list filters, current page) lives in **URL search params**, not in component state – see the
-list-screen pattern in the noc-ui docs.
+list-screen pattern in the platform docs.
 
 | Feature                     | Routes | Description |
 |-----------------------------|--------|-------------|
@@ -34,8 +34,8 @@ list-screen pattern in the noc-ui docs.
 
 ## UI
 
-All UI comes from `@donorlin/noc-ui` – the npm workspace `packages/noc-ui`, consumed as TypeScript source
-without a build (documentation: `packages/noc-ui/docs/llms.txt`).
+All UI comes from `@noc/platform` – the npm workspace `packages/platform`, consumed as TypeScript source
+without a build (documentation: `packages/platform/docs/llms.txt`).
 Its styles are imported once in `src/main.tsx`, `NocProvider` wraps the app in `src/app/App.tsx`. Features
 contain no CSS; layout uses the library's `Stack`, `Inline`, `Grid`, `Card` and `Section`.
 
@@ -43,7 +43,7 @@ contain no CSS; layout uses the library's `Stack`, `Inline`, `Grid`, `Card` and 
 
 [`src/app/queryClient.ts`](src/app/queryClient.ts) configures TanStack Query: 30 s stale time, no retry for
 HTTP 404, at most two retries otherwise. Screens use the query hooks generated per API and render their
-states with noc-ui's `QueryState` (details) or `DataTable loading` (lists).
+states with the platform's `QueryState` (details) or `DataTable loading` (lists).
 
 ## API layer
 

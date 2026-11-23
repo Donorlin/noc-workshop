@@ -1,7 +1,7 @@
 @import "@fontsource-variable/montserrat/wght.css";
 @import "@fontsource-variable/parkinsans/wght.css";
 
-/* Night of Chances theme – the same values as app/packages/noc-ui/src/styles/tokens.css. */
+/* Night of Chances theme – the same values as app/packages/platform/src/styles/tokens.css. */
 :root {
   --ifm-color-primary: #007a74;
   --ifm-color-primary-dark: #006e68;

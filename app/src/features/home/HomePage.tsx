@@ -1,4 +1,4 @@
-import { Card, DescriptionList, Grid, Heading, Page, Section, Stack, Text } from "@donorlin/noc-ui";
+import { Card, DescriptionList, Grid, Heading, Page, Section, Stack, Text } from "@noc/platform";
 import { event } from "./event";
 
 export function HomePage() {

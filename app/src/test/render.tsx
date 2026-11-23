@@ -1,4 +1,4 @@
-import { NocProvider } from "@donorlin/noc-ui";
+import { NocProvider } from "@noc/platform";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { render } from "@testing-library/react";
 import { createMemoryRouter, RouterProvider, type RouteObject } from "react-router";

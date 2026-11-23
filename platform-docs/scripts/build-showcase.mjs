@@ -1,4 +1,4 @@
-// Builds the noc-ui playground (app/packages/noc-ui/playground) into static/showcase-app, where the Showcase page
+// Builds the platform playground (app/packages/platform/playground) into static/showcase-app, where the Showcase page
 // embeds it in an iframe – so the library's global styles never mix with the documentation site.
 import { execFileSync } from "node:child_process";
 import { existsSync } from "node:fs";
@@ -16,7 +16,7 @@ if (!existsSync(`${app}/node_modules`)) {
 
 execFileSync(
   "npx",
-  ["vite", "build", "--config", "packages/noc-ui/playground/vite.config.ts", "--base", base, "--outDir", outDir, "--emptyOutDir", "--logLevel", "warn"],
+  ["vite", "build", "--config", "packages/platform/playground/vite.config.ts", "--base", base, "--outDir", outDir, "--emptyOutDir", "--logLevel", "warn"],
   { cwd: app, stdio: "inherit", shell: process.platform === "win32" },
 );
 console.log("✔ showcase built");

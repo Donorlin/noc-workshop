@@ -49,7 +49,7 @@ Header: Home · Programme
 
 ## 4. Non-functional requirements
 
-- **NFR-1** UI is built with `@donorlin/noc-ui` only and follows its documented list-screen and
+- **NFR-1** UI is built with `@noc/platform` only and follows its documented list-screen and
   detail-screen patterns.
 - **NFR-2** Texts, labels and messages are exactly as written in this specification (English).
 - **NFR-3** All actions are usable with the keyboard; table rows open with Enter.

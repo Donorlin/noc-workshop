@@ -1,20 +1,20 @@
 ---
 name: noc-screen
 description: >-
-  Build a screen of a NoC application from its specification and mockup image with @donorlin/noc-ui:
+  Build a screen of a NoC application from its specification and mockup image with @noc/platform:
   read the spec and the image, list the screen's concerns (layout, filters, forms, tables, detail sections,
-  data loading, navigation, states), look each up in the noc-ui docs (noc-ui-docs skill), present a plan,
+  data loading, navigation, states), look each up in the platform docs (noc-platform-docs skill), present a plan,
   write the code on the generated API hooks, and check the result in a real browser (playwright-cli skill).
   Use whenever the user wants to implement, build or code a screen, page or feature UI – "build the list
   screen", "implement 01-programme-list.md", "code this mockup", "continue with step two" – even if they don't
-  name noc-ui.
+  name the platform.
 ---
 
-# Specification + mockup → noc-ui screen
+# Specification + mockup → platform screen
 
 - **The specification** says *what*: texts, fields, rules, states, data, navigation. It is authoritative.
 - **The mockup** says *where*: regions and order. Where it disagrees with the spec, the spec wins – say so.
-- **The noc-ui docs** say *how*: which component and pattern, with its real props.
+- **The platform docs** say *how*: which component and pattern, with its real props.
 
 The failures this skill prevents: inventing labels, inventing components or props, and hand-rolling what the
 library provides (debounced filters with `useEffect`, raw `<table>`, `if (isLoading)` chains, CSS).
@@ -38,10 +38,10 @@ mocks. If the API layer doesn't exist yet, stop and say it must be built first (
 
 Describe the screen by what it does – "page frame with a disabled primary action; filters that apply while
 typing, with a min-length rule; a server-paged table with a result count and clickable rows; state that
-survives the detail and a reload; loading, empty and error states". Then use the **`noc-ui-docs` skill** to
-answer each concern from `packages/noc-ui/docs` – **`docs/patterns/` first** (list screen, detail
-screen, data loading), then the component pages, then the props in `packages/noc-ui/src`. Never edit
-`packages/noc-ui` while building a screen. If your
+survives the detail and a reload; loading, empty and error states". Then use the **`noc-platform-docs` skill** to
+answer each concern from `packages/platform/docs` – **`docs/patterns/` first** (list screen, detail
+screen, data loading), then the component pages, then the props in `packages/platform/src`. Never edit
+`packages/platform` while building a screen. If your
 agent can delegate to a subagent, let it do the reading and return cited answers.
 
 ## 4. Plan – and wait for confirmation
@@ -57,7 +57,7 @@ Wait for the user's approval unless they told you to go ahead.
 
 ## 5. Build
 
-- Only noc-ui components and layout primitives. No raw `<table>`/`<button>`/`<input>`/`<select>`, no CSS
+- Only @noc/platform components and layout primitives. No raw `<table>`/`<button>`/`<input>`/`<select>`, no CSS
   files, no `style={{…}}`, no hard-coded colours or sizes.
 - Highest-level component, default props; no wrapper the design doesn't need.
 - Forms and filters: `useNocForm` + zod, messages verbatim from the spec.

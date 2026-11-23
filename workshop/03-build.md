@@ -39,7 +39,7 @@ Continue with step two.
 ```
 
 The `noc-screen` skill reads the spec and the mockup, names the screen's **concerns**, looks each one up in
-the noc-ui docs (`docs/patterns/list-screen.mdx` first), and **stops with a plan**. Review it before you
+the platform docs (`docs/patterns/list-screen.mdx` first), and **stops with a plan**. Review it before you
 approve:
 
 - Does every component cite a doc page – or was one recalled from memory?

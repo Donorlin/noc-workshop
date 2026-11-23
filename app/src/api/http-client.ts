@@ -3,7 +3,7 @@
  * All backend APIs are reached through the gateway under `/api/<api-name>/…`.
  */
 
-/** Thrown for every non-2xx response. `status` is read by `getErrorStatus` from @donorlin/noc-ui. */
+/** Thrown for every non-2xx response. `status` is read by `getErrorStatus` from @noc/platform. */
 export class ApiError extends Error {
   readonly status: number;
   readonly body: unknown;

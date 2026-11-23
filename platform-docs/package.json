@@ -1,8 +1,8 @@
 {
-  "name": "noc-ui-docs",
+  "name": "platform-docs",
   "private": true,
   "version": "0.1.0",
-  "description": "Documentation website of @donorlin/noc-ui, rendered from app/packages/noc-ui/docs.",
+  "description": "Documentation website of @noc/platform, rendered from app/packages/platform/docs.",
   "scripts": {
     "start": "npm run build:showcase && docusaurus start",
     "build": "npm run build:showcase && docusaurus build",

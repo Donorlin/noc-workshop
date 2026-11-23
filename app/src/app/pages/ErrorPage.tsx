@@ -1,4 +1,4 @@
-import { Alert, Button, Page, getErrorMessage } from "@donorlin/noc-ui";
+import { Alert, Button, Page, getErrorMessage } from "@noc/platform";
 import { useRouteError } from "react-router";
 
 export function ErrorPage() {

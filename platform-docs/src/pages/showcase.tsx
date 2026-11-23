@@ -4,16 +4,16 @@ import styles from "./showcase.module.css";
 
 export default function Showcase() {
   return (
-    <Layout title="Showcase" description="Every noc-ui component, live">
+    <Layout title="Showcase" description="Every @noc/platform component, live">
       <div className={styles.intro}>
         <p className={styles.eyebrow}>Live</p>
         <h1>Showcase</h1>
         <p>
-          The real components from <code>app/packages/noc-ui</code> – filter, page and sort the table, hover the
+          The real components from <code>app/packages/platform</code> – filter, page and sort the table, hover the
           disabled actions.
         </p>
       </div>
-      <iframe className={styles.frame} src={useBaseUrl("/showcase-app/")} title="noc-ui showcase" />
+      <iframe className={styles.frame} src={useBaseUrl("/showcase-app/")} title="NoC Platform showcase" />
     </Layout>
   );
 }

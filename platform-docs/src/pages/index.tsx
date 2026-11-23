@@ -30,7 +30,7 @@ export default function Home() {
         <div className={styles.heroInner}>
           <p className={styles.eyebrow}>Night of Chances IT / 2026</p>
           <h1 className={styles.title}>
-            noc-ui
+            NoC Platform
             <br />
             <span>build screens, not boilerplate.</span>
           </h1>

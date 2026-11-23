@@ -17,7 +17,7 @@ write validation messages in components.
 
 ```tsx
 import { z } from "zod";
-import { Button, Form, FormSelect, FormSwitch, FormTextField, Grid, useNocForm } from "@donorlin/noc-ui";
+import { Button, Form, FormSelect, FormSwitch, FormTextField, Grid, useNocForm } from "@noc/platform";
 
 const sessionSchema = z.object({
   title: z.string().trim().min(5, "Enter at least 5 characters"),

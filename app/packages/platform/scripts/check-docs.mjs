@@ -62,7 +62,7 @@ const sections = {
   utilities: "Utilities",
 };
 const lines = [
-  "# @donorlin/noc-ui",
+  "# @noc/platform",
   "",
   "> UI platform library of Night of Chances applications: opinionated React components, forms, tables and",
   "> patterns built on Radix UI, TanStack Table and react-hook-form + zod. Read the relevant page before",

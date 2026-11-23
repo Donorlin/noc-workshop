@@ -1,4 +1,4 @@
-import { Button, EmptyState, Page } from "@donorlin/noc-ui";
+import { Button, EmptyState, Page } from "@noc/platform";
 import { Link } from "react-router";
 
 export function NotFoundPage() {

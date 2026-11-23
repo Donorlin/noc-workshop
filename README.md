@@ -57,7 +57,7 @@ Bring your own laptop, **set up at home** – there is no time for installs in t
 - [ ] **Run it:**
       `npm run dev` and open <http://localhost:5173> – you see the *Organizer* home page.
 - [ ] **Start your agent in `app/`** (`copilot`, `claude`, `codex`, …) in a second terminal and ask:
-      `Which skills are available in this project?` – it lists `noc-api`, `noc-screen`, `noc-ui-docs` and
+      `Which skills are available in this project?` – it lists `noc-api`, `noc-screen`, `noc-platform-docs` and
       `playwright-cli`.
 
 Good to know:
@@ -80,17 +80,17 @@ noc-workshop/
 ├── README.md                     # this page
 ├── workshop/                     # modules 01–04 and the presenter guide
 ├── specification/programme/      # the ticket: specification, mockups, OpenAPI contract
-├── noc-ui-docs/                 # Docusaurus website of the UI library (optional, not needed for the workshop)
+├── platform-docs/                 # Docusaurus website of the UI library (optional, not needed for the workshop)
 └── app/                          # the application – start your agent here
     ├── AGENTS.md                 #   short rules every agent reads (Claude Code reads it too)
     ├── ARCHITECTURE.md, docs/    #   how the app is built – for people and agents
     ├── .agents/skills/           #   the platform's skills (.claude/skills links here)
-    │   ├── noc-ui-docs/          #     look up the UI library in its docs
+    │   ├── noc-platform-docs/    #     look up the UI library in its docs
     │   ├── noc-api/              #     OpenAPI contract → hooks → mocks
     │   ├── noc-screen/           #     spec + mockup → screen, checked in the browser
     │   └── playwright-cli/       #     browser automation (from Microsoft)
     ├── src/                      #   the app code – the feature doesn't exist yet
-    └── packages/noc-ui/          #   the UI platform library – source, docs/ for agents, playground
+    └── packages/platform/          #   the UI platform library – source, docs/ for agents, playground
 ```
 
 ## Plan of the hour

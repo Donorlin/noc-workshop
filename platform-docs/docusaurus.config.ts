@@ -2,9 +2,9 @@ import type * as Preset from "@docusaurus/preset-classic";
 import type { Config } from "@docusaurus/types";
 import { themes as prismThemes } from "prism-react-renderer";
 
-// The pages are the library's own docs – the same MDX files agents read in app/packages/noc-ui/docs.
+// The pages are the library's own docs – the same MDX files agents read in app/packages/platform/docs.
 const config: Config = {
-  title: "noc-ui",
+  title: "NoC Platform",
   tagline: "The UI platform library of Night of Chances applications",
   favicon: "img/favicon.svg",
   url: "https://donorlin.github.io",
@@ -20,10 +20,10 @@ const config: Config = {
       "classic",
       {
         docs: {
-          path: "../app/packages/noc-ui/docs",
+          path: "../app/packages/platform/docs",
           routeBasePath: "docs",
           sidebarPath: "./sidebars.ts",
-          editUrl: "https://github.com/Donorlin/noc-workshop/tree/main/app/packages/noc-ui/docs/",
+          editUrl: "https://github.com/Donorlin/noc-workshop/tree/main/app/packages/platform/docs/",
         },
         blog: false,
         theme: { customCss: "./src/css/custom.css" },
@@ -33,13 +33,13 @@ const config: Config = {
   themes: [
     [
       "@easyops-cn/docusaurus-search-local",
-      { hashed: true, docsDir: "../app/packages/noc-ui/docs", docsRouteBasePath: "docs", indexBlog: false, indexPages: false },
+      { hashed: true, docsDir: "../app/packages/platform/docs", docsRouteBasePath: "docs", indexBlog: false, indexPages: false },
     ],
   ],
   themeConfig: {
     colorMode: { respectPrefersColorScheme: true },
     navbar: {
-      title: "noc-ui",
+      title: "NoC Platform",
       logo: { alt: "Night of Chances", src: "img/logo.svg" },
       items: [
         { type: "docSidebar", sidebarId: "docs", position: "left", label: "Docs" },

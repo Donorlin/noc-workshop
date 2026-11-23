@@ -1,4 +1,4 @@
-import { AppShell, AppShellBrand, AppShellNav } from "@donorlin/noc-ui";
+import { AppShell, AppShellBrand, AppShellNav } from "@noc/platform";
 import { Link, NavLink, Outlet, ScrollRestoration } from "react-router";
 import { features } from "@/features";
 

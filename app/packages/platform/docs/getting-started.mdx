@@ -1,18 +1,18 @@
 ---
 title: Getting started
-description: Install @donorlin/noc-ui, import the styles, render NocProvider and AppShell, and learn the rules every NoC application follows.
+description: Install @noc/platform, import the styles, render NocProvider and AppShell, and learn the rules every NoC application follows.
 components: [NocProvider]
 ---
 
 # Getting started
 
-`@donorlin/noc-ui` is the UI platform library of Night of Chances applications. It gives every application
+`@noc/platform` is the UI platform library of Night of Chances applications. It gives every application
 the same look, the same components and the same patterns for forms, tables, filters and data loading.
 
 ## Install
 
-The library is an npm workspace of this repository (`packages/noc-ui`). An application depends on it with
-`"@donorlin/noc-ui": "*"` in `package.json` and compiles its TypeScript source – there is no build step.
+The library is an npm workspace of this repository (`packages/platform`). An application depends on it with
+`"@noc/platform": "*"` in `package.json` and compiles its TypeScript source – there is no build step.
 
 Peer dependencies: `react` and `react-dom` 19, `react-hook-form` 7, `zod` 4. Fonts (Montserrat, Parkinsans)
 and icons (`lucide-react`) come with the library.
@@ -23,8 +23,8 @@ Import the stylesheet **once** and render `NocProvider` **once**, at the root of
 
 ```tsx
 // src/main.tsx
-import "@donorlin/noc-ui/styles.css";
-import { NocProvider } from "@donorlin/noc-ui";
+import "@noc/platform/styles.css";
+import { NocProvider } from "@noc/platform";
 
 createRoot(document.getElementById("root")!).render(
   <NocProvider>
@@ -71,4 +71,4 @@ See [Layout](foundations/layout.mdx).
 ## Where to find what
 
 The full index of pages with one-line descriptions is in [`llms.txt`](llms.txt). All documentation ships
-next to the source in `packages/noc-ui/docs/`, so it always matches the code.
+next to the source in `packages/platform/docs/`, so it always matches the code.
