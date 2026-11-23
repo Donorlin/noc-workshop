@@ -19,7 +19,7 @@
 
 # 02 · Understand and plan
 
-**Time:** 10–20 minutes · [Previous](01-platform-and-skills.md) | [Overview](../README.md) | [Next: Build](03-build.md)
+**Time:** 18:10 – 18:20 · [Previous: The NoC platform](01-platform-and-skills.md) | [Overview](../README.md) | [Next: Build](03-build.md)
 
 ## 1. The ticket
 
@@ -65,4 +65,4 @@ Review it like a teammate's plan: does every step end with a check you can run? 
 (`noc-api`, `noc-screen`) instead of hand-writing what they do? Does it add dependencies (`AGENTS.md`
 forbids that)?
 
-[Previous](01-platform-and-skills.md) | [Overview](../README.md) | [Next: Build](03-build.md)
+[Previous: The NoC platform](01-platform-and-skills.md) | [Overview](../README.md) | [Next: Build](03-build.md)

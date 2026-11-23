@@ -13,7 +13,7 @@
 
 # 03 · Build
 
-**Time:** 20–50 minutes · [Previous](02-understand-and-plan.md) | [Overview](../README.md) | [Next: Verify](04-verify.md)
+**Time:** 18:20 – 18:50 · [Previous](02-understand-and-plan.md) | [Overview](../README.md) | [Next: Verify](04-verify.md)
 
 ## 1. API layer (≈ 6 minutes of agent time)
 

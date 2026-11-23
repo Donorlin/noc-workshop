@@ -99,7 +99,7 @@ You follow along on your laptop; the presenter runs the same prompts on the scre
 
 |          Time | Module | What happens |
 |--------------:|--------|--------------|
-| 18:00 – 18:10 | [01 · Platform and skills](workshop/01-platform-and-skills.md) | Why agents need platform knowledge; instructions vs. skills; how skills are shared. |
+| 18:00 – 18:10 | [01 · The NoC platform and its skills](workshop/01-platform-and-skills.md) | Meet the fictional platform – UI library, app template, API and mocks – and the four skills that teach it to your agent. |
 | 18:10 – 18:20 | [02 · Understand and plan](workshop/02-understand-and-plan.md) | Read the spec and the mockup, find the gaps, plan in steps. |
 | 18:20 – 18:50 | [03 · Build](workshop/03-build.md) | API layer from the contract, then the list screen from spec + mockup. |
 | 18:50 – 19:00 | [04 · Verify](workshop/04-verify.md) | Acceptance criteria with evidence. Homework: the detail screen. |
