@@ -1,6 +1,13 @@
 import type * as Preset from "@docusaurus/preset-classic";
 import type { Config } from "@docusaurus/types";
+import { createRequire } from "node:module";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import { themes as prismThemes } from "prism-react-renderer";
+
+const siteDir = dirname(fileURLToPath(import.meta.url));
+const require = createRequire(import.meta.url);
+const appDir = resolve(siteDir, "../app");
 
 // The pages are the library's own docs – the same MDX files agents read in app/packages/platform/docs.
 const config: Config = {
@@ -15,6 +22,8 @@ const config: Config = {
   onBrokenLinks: "throw",
   markdown: { hooks: { onBrokenMarkdownLinks: "throw" } },
   i18n: { defaultLocale: "en", locales: ["en"] },
+  // Infima goes into a CSS layer, so the library's own styles win inside live examples.
+  future: { v4: { useCssCascadeLayers: true } },
   presets: [
     [
       "classic",
@@ -26,17 +35,35 @@ const config: Config = {
           editUrl: "https://github.com/Donorlin/noc-workshop/tree/main/app/packages/platform/docs/",
         },
         blog: false,
-        theme: { customCss: "./src/css/custom.css" },
+        theme: { customCss: ["./src/css/custom.css", "./src/css/platform-live.css"] },
       } satisfies Preset.Options,
     ],
   ],
   themes: [
+    "@docusaurus/theme-live-codeblock",
     [
       "@easyops-cn/docusaurus-search-local",
       { hashed: true, docsDir: "../app/packages/platform/docs", docsRouteBasePath: "docs", indexBlog: false, indexPages: false },
     ],
   ],
+  plugins: [
+    // Live examples run the library from its TypeScript source, with the app's dependencies (one copy of React).
+    () => ({
+      name: "noc-platform-source",
+      configureWebpack: () => ({
+        resolve: {
+          alias: {
+            "@noc/platform$": resolve(appDir, "packages/platform/src/index.ts"),
+            react: dirname(require.resolve("react/package.json")),
+            "react-dom": dirname(require.resolve("react-dom/package.json")),
+          },
+          modules: ["node_modules", resolve(appDir, "node_modules")],
+        },
+      }),
+    }),
+  ],
   themeConfig: {
+    liveCodeBlock: { playgroundPosition: "top" },
     colorMode: { respectPrefersColorScheme: true },
     navbar: {
       title: "NoC Platform",

@@ -21,6 +21,24 @@ them in the rare application CSS you need. **Never hard-code a hex colour or a p
 | `--noc-color-yellow`        | `#f2af00` | Accent border                               |
 | `--noc-color-paper`         | `#faf9f6` | Page background                             |
 
+```tsx live
+<Grid columns={4} gap={3}>
+  {["night", "ink", "mint", "mint-light", "pink", "yellow", "paper", "morning"].map((name) => (
+    <Stack key={name} gap={1}>
+      <div
+        style={{
+          height: 56,
+          borderRadius: "var(--noc-radius-md)",
+          border: "1px solid var(--noc-color-border)",
+          background: `var(--noc-color-${name})`,
+        }}
+      />
+      <Text size="sm">--noc-color-{name}</Text>
+    </Stack>
+  ))}
+</Grid>
+```
+
 ## Semantic colours
 
 | Token                         | Use                                  |
@@ -83,4 +101,13 @@ Override tokens on `:root` (or on any element to theme a subtree) **after** impo
 :root {
   --noc-color-mint-light: #9be7d8;
 }
+```
+
+```tsx live
+<Inline gap={6}>
+  <Button variant="primary">Default theme</Button>
+  <div style={{ "--noc-color-mint-light": "#f2af00", "--noc-color-mint-light-hover": "#ffc533" }}>
+    <Button variant="primary">Themed subtree</Button>
+  </div>
+</Inline>
 ```

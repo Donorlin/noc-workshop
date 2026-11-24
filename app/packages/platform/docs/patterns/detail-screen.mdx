@@ -48,6 +48,52 @@ const listUrl = { pathname: "/programme", search: location.search };
 >
 ```
 
+```tsx live
+<Page
+  title="Hacking the CTF"
+  breadcrumbs={
+    <Breadcrumbs>
+      <BreadcrumbItem asChild>
+        <a href="#">Programme</a>
+      </BreadcrumbItem>
+      <BreadcrumbItem current>Hacking the CTF</BreadcrumbItem>
+    </Breadcrumbs>
+  }
+  actions={
+    <>
+      <Button disabledReason="Coming soon">Edit session</Button>
+      <Button asChild variant="dark">
+        <a href="#">Back</a>
+      </Button>
+    </>
+  }
+>
+  <Section title="Session" accent="yellow">
+    <DescriptionList
+      items={[
+        { label: "Type", value: <Tag tone="yellow" icon={<Code />}>Workshop</Tag> },
+        { label: "Room", value: "BC150" },
+        { label: "Time", value: formatTimeRange("2026-11-25T18:00:00+01:00", "2026-11-25T19:00:00+01:00") },
+        { label: "Capacity", value: null },
+        { label: "Description", value: "Find the vulnerabilities in a deliberately broken AI app.", fullWidth: true },
+      ]}
+    />
+  </Section>
+  <Section title="Speakers">
+    <Stack gap={4}>
+      <Alert tone="warning" title="Some speaker details could not be loaded" />
+      <Inline gap={3}>
+        <Avatar name="Jana Nováková" />
+        <Stack gap={0}>
+          <Text weight="bold">Jana Nováková</Text>
+          <Text size="sm" tone="muted">Staff Engineer, Example Corp</Text>
+        </Stack>
+      </Inline>
+    </Stack>
+  </Section>
+</Page>
+```
+
 ## Sections
 
 - One `Section` per group the specification names, each with its own heading. Keep the order of the

@@ -1,0 +1,78 @@
+/*
+ * The library's styles for live examples. Only the tokens and the .noc-* component classes are loaded;
+ * the library's global base styles (html, body, headings, links) are re-applied inside .noc-live only,
+ * so they never change the documentation site itself.
+ */
+@import "../../../app/packages/platform/src/styles/tokens.css";
+@import "../../../app/packages/platform/src/components/typography/typography.css";
+@import "../../../app/packages/platform/src/components/layout/layout.css";
+@import "../../../app/packages/platform/src/components/actions/actions.css";
+@import "../../../app/packages/platform/src/components/data-display/data-display.css";
+@import "../../../app/packages/platform/src/components/forms/forms.css";
+@import "../../../app/packages/platform/src/components/data-table/data-table.css";
+
+.noc-live {
+  padding: var(--noc-space-6);
+  font-family: var(--noc-font-body);
+  font-size: var(--noc-font-size-md);
+  line-height: var(--noc-line-height);
+  color: var(--noc-color-text);
+  background: var(--noc-color-background);
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: auto;
+}
+
+.noc-live *,
+.noc-live *::before,
+.noc-live *::after,
+[data-radix-popper-content-wrapper] * {
+  box-sizing: border-box;
+}
+
+[data-radix-popper-content-wrapper] {
+  font-family: var(--noc-font-body);
+  color: var(--noc-color-text);
+}
+
+:where(.noc-live) :where(h1, h2, h3, h4, p, dl, dd, figure, ul, ol) {
+  margin: 0;
+}
+
+:where(.noc-live) :where(button, input, select, textarea) {
+  font: inherit;
+  color: inherit;
+}
+
+:where(.noc-live) :where(a) {
+  color: inherit;
+}
+
+:where(.noc-live) :where(table) {
+  display: table;
+  margin: 0;
+  overflow: visible;
+}
+
+:where(.noc-live) :where(tr, th, td) {
+  background: none;
+  border: 0;
+}
+
+:where(.noc-live) :where(:focus-visible) {
+  outline: 2px solid var(--noc-color-focus);
+  outline-offset: 2px;
+}
+
+.noc-live__error {
+  margin-top: var(--noc-space-4);
+  white-space: pre-wrap;
+  color: var(--noc-color-pink);
+  font-family: var(--noc-font-mono, monospace);
+  font-size: var(--noc-font-size-sm);
+}
+
+/* An application shell fills the window in an app; in an example it only needs its content's height. */
+.noc-live .noc-app-shell {
+  min-height: 0;
+}

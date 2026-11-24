@@ -28,7 +28,34 @@ All use the `en-GB` locale and a 24-hour clock. They throw on `undefined` – ch
 <Text>{isEmptyValue(speaker.company) ? EMPTY_VALUE : speaker.company}</Text>
 ```
 
+```tsx live
+<DescriptionList
+  columns={2}
+  items={[
+    { label: "formatDate", value: formatDate("2026-11-25T18:00:00+01:00") },
+    { label: "formatTime", value: formatTime("2026-11-25T18:00:00+01:00") },
+    { label: "formatTimeRange", value: formatTimeRange("2026-11-25T18:00:00+01:00", "2026-11-25T19:30:00+01:00") },
+    { label: "formatNumber", value: formatNumber(1234567) },
+    { label: "isEmptyValue(\"\")", value: String(isEmptyValue("")) },
+    { label: "Missing value", value: null },
+  ]}
+/>
+```
+
 ## useDebouncedValue
 
 `useDebouncedValue(value, delayMs = 400)` returns `value` after it stopped changing for `delayMs`. For filter
 forms use [`useLiveFilters`](../components/filter-panel.mdx) instead.
+
+```tsx live
+function Example() {
+  const [title, setTitle] = useState("");
+  const debounced = useDebouncedValue(title, 400);
+  return (
+    <Stack gap={3}>
+      <TextField label="Title" value={title} onChange={(event) => setTitle(event.target.value)} />
+      <Text size="sm" tone="muted">Debounced: {debounced || EMPTY_VALUE}</Text>
+    </Stack>
+  );
+}
+```

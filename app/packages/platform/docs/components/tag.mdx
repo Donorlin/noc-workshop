@@ -39,6 +39,34 @@ export function SessionTypeTag({ type }: { type: SessionType }) {
 }
 ```
 
+```tsx live
+function SessionTypes() {
+  const sessionTypes = {
+    TALK: { label: "Talk", tone: "pink", icon: <Mic /> },
+    WORKSHOP: { label: "Workshop", tone: "yellow", icon: <Code /> },
+    PANEL: { label: "Panel", tone: "mint", icon: <MessagesSquare /> },
+  } as const;
+
+  return (
+    <Inline gap={2}>
+      {Object.entries(sessionTypes).map(([type, { label, tone, icon }]) => (
+        <Tag key={type} tone={tone} icon={icon}>
+          {label}
+        </Tag>
+      ))}
+      <Tag>Neutral</Tag>
+    </Inline>
+  );
+}
+```
+
 ## Badge
 
 Small dark counter next to a label: `Saved <Badge>3</Badge>`. Props: `children`.
+
+```tsx live
+<Inline gap={2}>
+  <Text weight="bold">Speakers</Text>
+  <Badge>3</Badge>
+</Inline>
+```

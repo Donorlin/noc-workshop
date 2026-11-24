@@ -27,3 +27,20 @@ Combine with `Inline` and `Stack` for a person row:
   </Stack>
 </Inline>
 ```
+
+```tsx live
+<Stack gap={4}>
+  <Inline gap={3}>
+    <Avatar name="Jana Nováková" size="sm" />
+    <Avatar name="Jana Nováková" />
+    <Avatar name="Jana Nováková" size="lg" />
+  </Inline>
+  <Inline gap={3}>
+    <Avatar name="Peter Horváth" />
+    <Stack gap={0}>
+      <Text weight="bold">Peter Horváth</Text>
+      <Text size="sm" tone="muted">Staff Engineer, Example Corp</Text>
+    </Stack>
+  </Inline>
+</Stack>
+```

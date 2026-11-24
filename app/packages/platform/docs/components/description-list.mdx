@@ -23,6 +23,21 @@ Read-only label/value pairs. Use it inside a `Section` on detail screens.
 </Section>
 ```
 
+```tsx live
+<Section title="Session" accent="yellow">
+  <DescriptionList
+    items={[
+      { label: "Title", value: "Hacking the CTF" },
+      { label: "Type", value: <Tag tone="yellow" icon={<Code />}>Workshop</Tag> },
+      { label: "Room", value: "BC150" },
+      { label: "Time", value: formatTimeRange("2026-11-25T18:00:00+01:00", "2026-11-25T19:00:00+01:00") },
+      { label: "Capacity", value: null },
+      { label: "Description", value: "Find the vulnerabilities in a deliberately broken AI app.", fullWidth: true },
+    ]}
+  />
+</Section>
+```
+
 | Prop      | Type                    | Default | Description                         |
 |-----------|-------------------------|---------|-------------------------------------|
 | `items`   | `DescriptionListItem[]` |         | Required.                           |

@@ -48,6 +48,49 @@ export function SessionForm({ onSave }: { onSave: (values: z.output<typeof sessi
 }
 ```
 
+```tsx live noInline
+const sessionSchema = z.object({
+  title: z.string().trim().min(5, "Enter at least 5 characters"),
+  room: z.enum(["CD300", "CD150", "BC150"], { error: "Choose a room" }),
+  capacity: z.string().regex(/^\d{1,3}$/, "Digits only, at most 3"),
+  recorded: z.boolean(),
+});
+const rooms = ["CD300", "CD150", "BC150"].map((room) => ({ value: room, label: room }));
+
+function SessionForm({ onSave }: { onSave: (values: z.output<typeof sessionSchema>) => void }) {
+  const form = useNocForm({
+    schema: sessionSchema,
+    defaultValues: { title: "", capacity: "", recorded: false },
+  });
+
+  return (
+    <Form form={form} onSubmit={onSave}>
+      <Grid columns={2}>
+        <FormTextField name="title" label="Title" required />
+        <FormSelect name="room" label="Room" options={rooms} required />
+        <FormTextField name="capacity" label="Capacity" inputMode="numeric" maxLength={3} />
+        <FormSwitch name="recorded" label="Recorded" />
+      </Grid>
+      <Button type="submit" variant="primary" loading={form.formState.isSubmitting}>
+        Save
+      </Button>
+    </Form>
+  );
+}
+
+function Example() {
+  const [saved, setSaved] = useState<unknown>();
+  return (
+    <Stack gap={4}>
+      <SessionForm onSave={setSaved} />
+      {saved && <Alert tone="success" title="Saved">{JSON.stringify(saved)}</Alert>}
+    </Stack>
+  );
+}
+
+render(<Example />);
+```
+
 ## useNocForm
 
 | Option          | Type                                                        | Default       | Description |

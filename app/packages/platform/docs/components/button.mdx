@@ -14,6 +14,17 @@ components: [Button, TextLink, ButtonVariant]
 <Button variant="ghost" size="sm">Reset</Button>
 ```
 
+```tsx live
+<Inline gap={3} wrap>
+  <Button variant="primary" iconEnd={<Plus size={16} />}>New session</Button>
+  <Button variant="dark">Back</Button>
+  <Button>Cancel</Button>
+  <Button variant="ghost" size="sm">Reset</Button>
+  <Button variant="danger" iconStart={<Trash2 size={16} />}>Delete</Button>
+  <Button loading>Saving</Button>
+</Inline>
+```
+
 | Prop             | Type                                                        | Default       | Description                                                                 |
 |------------------|-------------------------------------------------------------|---------------|-----------------------------------------------------------------------------|
 | `variant`        | `"primary" \| "dark" \| "secondary" \| "ghost" \| "danger"`  | `"secondary"` | See below.                                                                  |
@@ -37,6 +48,12 @@ When an action is visible but not available yet (not implemented, missing permis
 
 ```tsx
 <Button disabledReason="Coming soon">Edit session</Button>
+```
+
+```tsx live
+<Button disabledReason="Coming soon" iconStart={<Pencil size={16} />}>
+  Edit session
+</Button>
 ```
 
 The button gets `aria-disabled`, ignores clicks, **stays focusable** so keyboard users can reach the
@@ -64,6 +81,19 @@ Bold inline link, optionally with a trailing icon: "See full programme →".
     See full programme <ArrowRight size={16} />
   </Link>
 </TextLink>
+```
+
+```tsx live
+<Stack gap={4} align="start">
+  <TextLink href="#" iconEnd={<ArrowRight size={16} />}>
+    See full programme
+  </TextLink>
+  <Button asChild variant="dark">
+    <a href="#">
+      <ArrowLeft size={16} /> Back to programme
+    </a>
+  </Button>
+</Stack>
 ```
 
 Props: `iconEnd` (when rendering a plain `<a>`), `asChild`, plus native `a` props.

@@ -29,6 +29,65 @@ const columns: DataTableColumn<SessionSummary>[] = [
 />
 ```
 
+```tsx live noInline
+interface Session {
+  id: string;
+  title: string;
+  type: "TALK" | "WORKSHOP" | "PANEL";
+  room: string;
+  startsAt: string;
+  endsAt: string;
+  freeSpots: number | null;
+}
+
+const titles = ["Shipping AI features safely", "Design systems at scale", "From intern to tech lead", "Hacking the CTF"];
+const sessions: Session[] = Array.from({ length: 23 }, (_, index) => ({
+  id: `s-${index + 1}`,
+  title: `${titles[index % titles.length]} #${index + 1}`,
+  type: (["TALK", "WORKSHOP", "PANEL"] as const)[index % 3],
+  room: ["CD300", "CD150", "BC150", "BC35"][index % 4],
+  startsAt: `2026-11-25T${17 + (index % 5)}:00:00+01:00`,
+  endsAt: `2026-11-25T${18 + (index % 5)}:00:00+01:00`,
+  freeSpots: index % 4 === 0 ? null : (index * 7) % 30,
+}));
+
+const typeTags = {
+  TALK: <Tag tone="pink" icon={<Mic />}>Talk</Tag>,
+  WORKSHOP: <Tag tone="yellow" icon={<Code />}>Workshop</Tag>,
+  PANEL: <Tag tone="mint" icon={<MessagesSquare />}>Panel</Tag>,
+};
+
+const columns: DataTableColumn<Session>[] = [
+  { id: "title", header: "Title", accessor: "title", sortable: true },
+  { id: "type", header: "Type", accessor: "type", cell: (row) => typeTags[row.type] },
+  { id: "room", header: "Room", accessor: "room", sortable: true },
+  { id: "time", header: "Time", accessor: "startsAt", cell: (row) => formatTimeRange(row.startsAt, row.endsAt) },
+  { id: "freeSpots", header: "Free spots", accessor: "freeSpots", align: "end" },
+];
+
+function Example() {
+  const [page, setPage] = useState(0);
+  const [opened, setOpened] = useState<string>();
+  return (
+    <Stack gap={3}>
+      <DataTable
+        columns={columns}
+        data={sessions}
+        getRowId={(row) => row.id}
+        onRowClick={(row) => setOpened(row.title)}
+        rowLabel={(row) => `Open ${row.title}`}
+        pageIndex={page}
+        onPageChange={setPage}
+        caption="Programme sessions"
+      />
+      <Text size="sm" tone="muted">Opened: {opened ?? EMPTY_VALUE}</Text>
+    </Stack>
+  );
+}
+
+render(<Example />);
+```
+
 Define `columns` **outside the component** (or with `useMemo`) so they are not recreated on every render.
 
 ## Props
@@ -91,6 +150,18 @@ last existing page. See [List screen](../patterns/list-screen.mdx).
   pageIndex={page}
   onPageChange={setPage}         // triggers the next request
   loading={query.isFetching}
+/>
+```
+
+```tsx live
+<DataTable
+  columns={[
+    { id: "title", header: "Title", accessor: "title" },
+    { id: "room", header: "Room", accessor: "room" },
+  ]}
+  data={[]}
+  getRowId={(row) => row.id}
+  loading
 />
 ```
 

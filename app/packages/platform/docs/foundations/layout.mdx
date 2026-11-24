@@ -66,6 +66,29 @@ Children are stacked with a 24 px gap.
 </Page>
 ```
 
+```tsx live
+<Page
+  eyebrow="Night of Chances IT / 2026"
+  title="Programme"
+  description="All talks, workshops and panels of the evening."
+  breadcrumbs={
+    <Breadcrumbs>
+      <BreadcrumbItem asChild>
+        <a href="#">Home</a>
+      </BreadcrumbItem>
+      <BreadcrumbItem current>Programme</BreadcrumbItem>
+    </Breadcrumbs>
+  }
+  actions={
+    <Button variant="primary" iconEnd={<Plus size={16} />}>
+      New session
+    </Button>
+  }
+>
+  <Card>The filters and the table of the screen.</Card>
+</Page>
+```
+
 | Prop          | Type        | Description                                        |
 |---------------|-------------|----------------------------------------------------|
 | `title`       | `ReactNode` | Rendered as the page `h1`. Required.               |
@@ -98,6 +121,23 @@ current page, rendered as text with `aria-current="page"`). Pass breadcrumbs to 
 
 All three accept regular `div` props. `Grid` with `columns` collapses to one column under 720 px.
 
+```tsx live
+<Stack gap={4}>
+  <Inline gap={2} justify="between">
+    <Text weight="bold">Inline, justify="between"</Text>
+    <Inline gap={2}>
+      <Button size="sm">Cancel</Button>
+      <Button size="sm" variant="primary">Save</Button>
+    </Inline>
+  </Inline>
+  <Grid columns={3} gap={3}>
+    <Card>Grid</Card>
+    <Card>columns=3</Card>
+    <Card>gap=3</Card>
+  </Grid>
+</Stack>
+```
+
 ## Card and Section
 
 `Card` is a white bordered surface. `accent` adds the NoC programme-card top border
@@ -111,6 +151,25 @@ with its own heading:
 <Section title="Speakers" description="People presenting this session" actions={…} accent="pink">
   …
 </Section>
+```
+
+```tsx live
+<Stack gap={4}>
+  <Section
+    title="Speakers"
+    description="People presenting this session"
+    accent="pink"
+    actions={<Button size="sm" disabledReason="Coming soon">Add speaker</Button>}
+  >
+    <Text>A section is a card with a heading, used for every group of a detail screen.</Text>
+  </Section>
+  <Grid columns={4} gap={3}>
+    <Card accent="mint">accent="mint"</Card>
+    <Card accent="yellow">accent="yellow"</Card>
+    <Card accent="night">accent="night"</Card>
+    <Card muted>muted</Card>
+  </Grid>
+</Stack>
 ```
 
 | Prop          | Type                     | Description                               |

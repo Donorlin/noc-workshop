@@ -52,6 +52,26 @@ Without `NocProvider`, `Tooltip` and `Button` with `disabledReason` throw at run
 </AppShell>
 ```
 
+```tsx live
+<AppShell
+  appName="Organizer"
+  navigation={
+    <AppShellNav>
+      <a href="#" aria-current="page">Programme</a>
+      <a href="#">Speakers</a>
+    </AppShellNav>
+  }
+>
+  <Page
+    eyebrow="Night of Chances IT / 2026"
+    title="Programme"
+    description="All talks, workshops and panels of the evening."
+  >
+    <Text>The content of the screen goes here.</Text>
+  </Page>
+</AppShell>
+```
+
 See [Layout](foundations/layout.mdx).
 
 ## Rules for NoC applications
@@ -67,6 +87,15 @@ See [Layout](foundations/layout.mdx).
 6. **Unavailable actions stay visible** and explain why: `<Button disabledReason="Coming soon">`.
 7. **Lists and details follow the documented patterns:** [List screen](patterns/list-screen.mdx),
    [Detail screen](patterns/detail-screen.mdx).
+
+## Live examples
+
+On the [documentation website](https://donorlin.github.io/noc-workshop/) code blocks marked `tsx live` are
+editable and render the real components. Each one is self-contained and has no imports: every export of
+`@noc/platform`, React and its hooks (`useState`, …), `z` from zod and the `lucide-react` icons `ArrowLeft`,
+`ArrowRight`, `CalendarDays`, `Code`, `Link2`, `MessagesSquare`, `Mic`, `Pencil`, `Plus`, `Search`, `Trash2`
+and `Users` are in scope. Blocks marked `noInline` end with `render(<Example />)`. In application code,
+import everything as usual and leave `render` out.
 
 ## Where to find what
 

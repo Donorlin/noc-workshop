@@ -15,6 +15,18 @@ Headings use Parkinsans, everything else Montserrat. Do not style text with CSS;
 <Heading level={1} accent>budúcnosť technológií.</Heading>
 ```
 
+```tsx live
+<Stack gap={3}>
+  <Eyebrow>Night of Chances IT / 2026</Eyebrow>
+  <Heading level={1} accent>budúcnosť technológií.</Heading>
+  <Heading level={2}>Speakers</Heading>
+  <Heading level={3}>Hacking the CTF</Heading>
+  <Text>Body text for descriptions and longer paragraphs.</Text>
+  <Text tone="muted" size="sm">Updated 16 Nov 2026</Text>
+  <Text as="span" weight="bold">Jana Nováková</Text>
+</Stack>
+```
+
 | Prop     | Type                           | Default           | Description                                  |
 |----------|--------------------------------|-------------------|----------------------------------------------|
 | `level`  | `1 \| 2 \| 3 \| 4`             | `2`               | Semantic `h1`–`h4`.                           |

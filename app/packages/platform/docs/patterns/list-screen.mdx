@@ -82,6 +82,94 @@ export function ProgrammeListPage() {
 }
 ```
 
+```tsx live noInline
+// The same screen on local data: state in useState instead of the URL, filtering in memory instead of
+// useSearchSessions. In an app, follow the code above.
+const filterSchema = z.object({
+  title: z.string().trim().refine((v) => v === "" || v.length >= 2, "Enter at least 2 characters"),
+  type: z.enum(["TALK", "WORKSHOP", "PANEL"]).optional(),
+  onlyAvailable: z.boolean(),
+});
+type Filters = z.output<typeof filterSchema>;
+const emptyFilters: Filters = { title: "", type: undefined, onlyAvailable: false };
+
+const types = { TALK: ["Talk", "pink"], WORKSHOP: ["Workshop", "yellow"], PANEL: ["Panel", "mint"] } as const;
+const titles = ["Shipping AI features safely", "Design systems at scale", "From intern to tech lead", "Hacking the CTF"];
+const sessions = Array.from({ length: 23 }, (_, index) => ({
+  id: `s-${index + 1}`,
+  title: `${titles[index % titles.length]} #${index + 1}`,
+  type: (["TALK", "WORKSHOP", "PANEL"] as const)[index % 3],
+  room: ["CD300", "CD150", "BC150", "BC35"][index % 4],
+  freeSpots: index % 4 === 0 ? null : (index * 7) % 30,
+}));
+type Session = (typeof sessions)[number];
+
+const columns: DataTableColumn<Session>[] = [
+  { id: "title", header: "Title", accessor: "title" },
+  { id: "type", header: "Type", accessor: "type", cell: (row) => <Tag tone={types[row.type][1]}>{types[row.type][0]}</Tag> },
+  { id: "room", header: "Room", accessor: "room" },
+  { id: "freeSpots", header: "Free spots", accessor: "freeSpots", align: "end" },
+];
+
+function ProgrammeFilters({ value, onChange }: { value: Filters; onChange: (filters: Filters) => void }) {
+  const form = useNocForm({ schema: filterSchema, defaultValues: value });
+  useLiveFilters({ form, onChange });
+  return (
+    <Form form={form}>
+      <FilterPanel onReset={() => form.reset(emptyFilters)}>
+        <FormTextField name="title" label="Title" iconStart={<Search />} description="At least 2 characters" />
+        <FormSelect
+          name="type"
+          label="Type"
+          emptyOptionLabel="All types"
+          options={Object.entries(types).map(([value, [label]]) => ({ value, label }))}
+        />
+        <FormSwitch name="onlyAvailable" label="Only with free spots" />
+      </FilterPanel>
+    </Form>
+  );
+}
+
+function ProgrammeListPage() {
+  const [filters, setFilters] = useState<Filters>(emptyFilters);
+  const [page, setPage] = useState(0);
+  const items = sessions.filter(
+    (session) =>
+      session.title.toLowerCase().includes(filters.title.toLowerCase()) &&
+      (!filters.type || session.type === filters.type) &&
+      (!filters.onlyAvailable || (session.freeSpots ?? 0) > 0),
+  );
+
+  return (
+    <Page
+      eyebrow="Night of Chances IT / 2026"
+      title="Programme"
+      actions={<Button variant="primary" disabledReason="Coming soon" iconEnd={<Plus size={16} />}>New session</Button>}
+    >
+      <ProgrammeFilters
+        value={filters}
+        onChange={(next) => {
+          setFilters(next);
+          setPage(0);
+        }}
+      />
+      <DataTable
+        columns={columns}
+        data={items}
+        getRowId={(row) => row.id}
+        pageIndex={page}
+        onPageChange={setPage}
+        onRowClick={(row) => alert(`Open ${row.title}`)}
+        rowLabel={(row) => `Open ${row.title}`}
+        emptyState={<EmptyState title="No sessions match your filters" description="Try different filters." />}
+      />
+    </Page>
+  );
+}
+
+render(<ProgrammeListPage />);
+```
+
 `ProgrammeFilters` is the [live filter form](../components/filter-panel.mdx). Pass the current `filters` as its
 `defaultValues` so the form shows them again after "Back".
 

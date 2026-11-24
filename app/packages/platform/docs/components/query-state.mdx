@@ -17,6 +17,71 @@ const sessionQuery = useGetSession(sessionId);
 </QueryState>
 ```
 
+```tsx live noInline
+interface Session {
+  title: string;
+  room: string;
+}
+
+// A stand-in for a TanStack Query result – in an app this is useGetSession(sessionId).
+function useFakeQuery(state: "pending" | "success" | "error" | "404", retry: () => void) {
+  return {
+    data: state === "success" ? ({ title: "Hacking the CTF", room: "BC150" } as Session) : undefined,
+    isPending: state === "pending",
+    isError: state === "error" || state === "404",
+    error: state === "404" ? { status: 404 } : state === "error" ? new Error("Request failed with status 500") : null,
+    refetch: retry,
+  };
+}
+
+function Example() {
+  const [state, setState] = useState<"pending" | "success" | "error" | "404">("success");
+  const query = useFakeQuery(state, () => setState("success"));
+
+  return (
+    <Stack gap={4}>
+      <Inline gap={2}>
+        {(["pending", "success", "error", "404"] as const).map((next) => (
+          <Button key={next} size="sm" variant={next === state ? "dark" : "secondary"} onClick={() => setState(next)}>
+            {next}
+          </Button>
+        ))}
+      </Inline>
+      <QueryState
+        query={query}
+        loading={<SectionSkeleton rows={2} />}
+        error={(error, retry) =>
+          getErrorStatus(error) === 404 ? (
+            <EmptyState title="Session not found" />
+          ) : (
+            <Alert
+              tone="error"
+              title="The session could not be loaded"
+              action={<Button size="sm" onClick={retry}>Try again</Button>}
+            >
+              {getErrorMessage(error)}
+            </Alert>
+          )
+        }
+      >
+        {(session) => (
+          <Section title="Session">
+            <DescriptionList
+              items={[
+                { label: "Title", value: session.title },
+                { label: "Room", value: session.room },
+              ]}
+            />
+          </Section>
+        )}
+      </QueryState>
+    </Stack>
+  );
+}
+
+render(<Example />);
+```
+
 | Prop         | Type                                  | Default                    | Description |
 |--------------|---------------------------------------|----------------------------|-------------|
 | `query`      | `QueryLike<TData>`                    |                            | `{ data, isPending, isError, error, refetch? }` – a `useQuery` result fits. |

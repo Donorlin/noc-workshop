@@ -35,6 +35,48 @@ export function ProgrammeFilters({ value, onChange }: { value: Filters; onChange
 }
 ```
 
+```tsx live noInline
+const filterSchema = z.object({
+  title: z.string().trim().refine((v) => v === "" || v.length >= 2, "Enter at least 2 characters"),
+  type: z.enum(["TALK", "WORKSHOP", "PANEL"]).optional(),
+  onlyAvailable: z.boolean(),
+});
+type Filters = z.output<typeof filterSchema>;
+const emptyFilters: Filters = { title: "", type: undefined, onlyAvailable: false };
+const typeOptions = [
+  { value: "TALK", label: "Talk" },
+  { value: "WORKSHOP", label: "Workshop" },
+  { value: "PANEL", label: "Panel" },
+];
+
+function ProgrammeFilters({ value, onChange }: { value: Filters; onChange: (filters: Filters) => void }) {
+  const form = useNocForm({ schema: filterSchema, defaultValues: value });
+  useLiveFilters({ form, onChange, debounceMs: 400 });
+
+  return (
+    <Form form={form}>
+      <FilterPanel onReset={() => form.reset(emptyFilters)}>
+        <FormTextField name="title" label="Title" iconStart={<Search />} description="At least 2 characters" />
+        <FormSelect name="type" label="Type" emptyOptionLabel="All types" options={typeOptions} />
+        <FormSwitch name="onlyAvailable" label="Only with free spots" />
+      </FilterPanel>
+    </Form>
+  );
+}
+
+function Example() {
+  const [filters, setFilters] = useState<Filters>(emptyFilters);
+  return (
+    <Stack gap={4}>
+      <ProgrammeFilters value={filters} onChange={setFilters} />
+      <Text size="sm" tone="muted">onChange: {JSON.stringify(filters)}</Text>
+    </Stack>
+  );
+}
+
+render(<Example />);
+```
+
 ## useLiveFilters
 
 | Option       | Type                       | Default | Description |

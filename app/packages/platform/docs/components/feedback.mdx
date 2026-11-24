@@ -16,6 +16,21 @@ Inline message inside the page.
 </Alert>
 ```
 
+```tsx live
+<Stack gap={3}>
+  <Alert tone="info" title="Registration opens on 1 November" />
+  <Alert tone="success" title="Session saved" />
+  <Alert tone="warning" title="Some speaker details could not be loaded" />
+  <Alert
+    tone="error"
+    title="The programme could not be loaded"
+    action={<Button size="sm">Try again</Button>}
+  >
+    The server responded with status 500.
+  </Alert>
+</Stack>
+```
+
 | Prop       | Type                                           | Default  | Description |
 |------------|------------------------------------------------|----------|-------------|
 | `tone`     | `"info" \| "success" \| "warning" \| "error"`  | `"info"` | |
@@ -44,6 +59,19 @@ exist.
 />
 ```
 
+```tsx live
+<EmptyState
+  title="Session not found"
+  description="It may have been removed from the programme."
+  icon={<CalendarDays size={28} />}
+  action={
+    <Button asChild variant="dark">
+      <a href="#">Back to programme</a>
+    </Button>
+  }
+/>
+```
+
 Props: `title` (required), `description`, `icon` (defaults to a "no results" icon), `action`.
 
 ## Skeleton and SectionSkeleton
@@ -56,12 +84,34 @@ Animated placeholders shaped like the loading content. Prefer them to spinners.
 
 `DataTable` has its own skeleton rows via `loading`.
 
+```tsx live
+<Stack gap={4}>
+  <Inline gap={3}>
+    <Skeleton width={48} height={48} radius="pill" />
+    <Stack gap={2}>
+      <Skeleton width={180} height={16} radius="sm" />
+      <Skeleton width={120} height={12} radius="sm" />
+    </Stack>
+  </Inline>
+  <SectionSkeleton rows={2} columns={2} />
+</Stack>
+```
+
 ## Tooltip
 
 ```tsx
 <Tooltip content="Copy link">
   <Button size="sm" iconStart={<Link2 size={16} />} aria-label="Copy link" />
 </Tooltip>
+```
+
+```tsx live
+<Inline gap={3}>
+  <Tooltip content="Copy link">
+    <Button size="sm" iconStart={<Link2 size={16} />} aria-label="Copy link" />
+  </Tooltip>
+  <Text size="sm" tone="muted">Hover or focus the button.</Text>
+</Inline>
 ```
 
 Props: `content`, `children` (one focusable element), `side` (`"top"` default). Requires `NocProvider`. For
